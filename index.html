@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bode Coin — O Ativo Digital da Irmandade Moderna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dark: #8B6914;
+    --black: #060608;
+    --deep-blue: #080C1A;
+    --blue-mid: #0D1530;
+    --purple-soft: #1A1035;
+    --white: #F5F0E8;
+    --text-muted: #8A8090;
+    --glow: rgba(201,168,76,0.35);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; line-height: 0.92; }
+  .condensed { font-family: 'Barlow Condensed', sans-serif; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* ── GOLD LINE DIVIDER ── */
+  .divider {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: linear-gradient(180deg, rgba(6,6,8,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold); padding: 0.5rem 1.4rem;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 8rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  /* Animated road lines */
+  .road-canvas {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+
+  /* Radial glow background */
+  #hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(12,20,60,0.8) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9; letter-spacing: 0.03em;
+    position: relative; z-index: 2;
+    background: linear-gradient(160deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px rgba(201,168,76,0.3));
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-title-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 4rem);
+    letter-spacing: 0.12em; color: var(--white);
+    position: relative; z-index: 2; margin-bottom: 1.5rem;
+    opacity: 0.85;
+  }
+
+  .hero-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 300; color: var(--text-muted);
+    max-width: 560px; line-height: 1.6;
+    position: relative; z-index: 2; margin-bottom: 2.5rem;
+  }
+
+  /* Mascot container with parallax effect */
+  .mascot-wrap {
+    position: absolute;
+    bottom: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: clamp(280px, 45vw, 600px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+    filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.7);
+  }
+  .mascot-wrap img { width: 100%; }
+
+  .hero-cta-wrap { position: relative; z-index: 2; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  .btn-primary {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; letter-spacing: 0.2em;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold));
+    background-size: 200% 200%;
+    color: var(--black); border: none;
+    padding: 1rem 2.8rem;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: background-position 0.4s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 30px rgba(201,168,76,0.4);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover {
+    background-position: 100% 100%;
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(201,168,76,0.6);
+  }
+
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); background: transparent;
+    padding: 1rem 2.2rem; cursor: pointer; text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    z-index: 2; opacity: 0.5;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint::after {
+    content: ''; width: 1px; height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 7rem 2rem; position: relative; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 1rem; text-align: center;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    text-align: center; line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .gold-text {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .section-intro {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; color: var(--text-muted); text-align: center;
+    max-width: 600px; margin: 0 auto 4rem; line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── OPPORTUNITY SECTION ── */
+  #opportunity { background: linear-gradient(180deg, var(--black) 0%, var(--deep-blue) 100%); }
+
+  .opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+  .opp-visual {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opp-img-wrap {
+    width: 85%;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.4rem;
+    position: relative;
+    box-shadow: 0 0 60px rgba(201,168,76,0.15), inset 0 0 40px rgba(0,0,0,0.5);
+  }
+  .opp-img-wrap img { width: 100%; display: block; }
+  .opp-img-wrap::before, .opp-img-wrap::after {
+    content: ''; position: absolute;
+    width: 20px; height: 20px;
+    border-color: var(--gold); border-style: solid;
+  }
+  .opp-img-wrap::before { top: -4px; left: -4px; border-width: 2px 0 0 2px; }
+  .opp-img-wrap::after  { bottom: -4px; right: -4px; border-width: 0 2px 2px 0; }
+
+  .opp-text { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .opp-quote {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem; font-weight: 600; line-height: 1.3;
+    color: var(--white);
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--gold);
+  }
+
+  .opp-body { color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+
+  .badge-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold); padding: 0.35rem 0.9rem;
+    background: rgba(201,168,76,0.05);
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--deep-blue); }
+
+  .flow-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; position: relative;
+    margin-top: 3rem;
+  }
+  .flow-grid::before {
+    content: '';
+    position: absolute;
+    top: 3rem; left: 12.5%; right: 12.5%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+    opacity: 0.4;
+  }
+  .flow-item {
+    text-align: center; padding: 0 1rem;
+    position: relative;
+  }
+  .flow-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .flow-icon {
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    background: var(--deep-blue);
+    position: relative; z-index: 1;
+    box-shadow: 0 0 20px rgba(201,168,76,0.2);
+  }
+  .flow-item-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 0.06em;
+    color: var(--white); margin-bottom: 0.5rem;
+  }
+  .flow-item-desc {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; font-weight: 300;
+  }
+
+  /* ── TOKEN INFO ── */
+  #token { background: linear-gradient(180deg, var(--deep-blue) 0%, var(--purple-soft) 100%); }
+
+  .token-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    margin-top: 3rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    box-shadow: 0 0 60px rgba(201,168,76,0.08);
+  }
+  .token-card {
+    background: rgba(8,12,26,0.8);
+    padding: 2.5rem 2rem; text-align: center;
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: background 0.3s, border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .token-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .token-card:hover { background: rgba(201,168,76,0.04); border-color: rgba(201,168,76,0.35); }
+  .token-card:hover::before { opacity: 1; }
+
+  .token-icon { font-size: 2rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(201,168,76,0.4)); }
+  .token-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 0.4rem;
+  }
+  .token-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: 0.08em;
+    color: var(--gold-light);
+  }
+  .token-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;
+  }
+
+  /* ── UTILITY CARDS ── */
+  #utility { background: var(--purple-soft); }
+
+  .util-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .util-card {
+    background: rgba(6,6,8,0.6);
+    border: 1px solid rgba(201,168,76,0.18);
+    padding: 2rem 1.5rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+  .util-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .util-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(201,168,76,0.15);
+    border-color: rgba(201,168,76,0.5);
+  }
+  .util-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .util-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; letter-spacing: 0.05em; color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+  .util-desc {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── HOW TO JOIN ── */
+  #join { background: linear-gradient(180deg, var(--purple-soft) 0%, var(--deep-blue) 100%); }
+
+  .steps { display: flex; gap: 0; position: relative; margin-top: 4rem; }
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 1.85rem; left: 2.5rem; right: 2.5rem; height: 1px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    opacity: 0.5;
+  }
+  .step { flex: 1; text-align: center; padding: 0 1rem; }
+  .step-num {
+    width: 3.8rem; height: 3.8rem; border-radius: 50%;
+    background: var(--deep-blue);
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold);
+    position: relative; z-index: 1;
+    box-shadow: 0 0 25px rgba(201,168,76,0.3);
+  }
+  .step-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; letter-spacing: 0.06em; color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .step-desc {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; font-weight: 300;
+  }
+
+  /* ── DIFFERENTIALS ── */
+  #differentials { background: var(--deep-blue); }
+
+  .diff-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem;
+  }
+  .diff-item {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(201,168,76,0.12);
+    background: rgba(6,6,8,0.5);
+    transition: border-color 0.3s;
+  }
+  .diff-item:hover { border-color: rgba(201,168,76,0.4); }
+  .diff-bullet {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0; margin-top: 0.35rem;
+    box-shadow: 0 0 12px var(--gold);
+  }
+  .diff-text-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+  .diff-text-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* ── VISION ── */
+  #vision {
+    background: var(--black);
+    text-align: center;
+    padding: 10rem 2rem;
+  }
+  .vision-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1.05; letter-spacing: 0.04em;
+    max-width: 900px; margin: 0 auto 3rem;
+  }
+
+  /* Decorative geometric border */
+  .geo-border {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 4rem 3rem;
+    position: relative;
+    max-width: 900px; margin: 0 auto;
+  }
+  .geo-border::before, .geo-border::after,
+  .geo-border .corner-br, .geo-border .corner-tl-inner {
+    content: ''; position: absolute;
+    width: 30px; height: 30px;
+    border-color: var(--gold); border-style: solid;
+  }
+  .geo-border::before { top: -1px; left: -1px; border-width: 3px 0 0 3px; }
+  .geo-border::after  { bottom: -1px; right: -1px; border-width: 0 3px 3px 0; }
+
+  /* ── CTA FINAL ── */
+  #cta-final {
+    background: linear-gradient(180deg, var(--black) 0%, rgba(8,12,26,1) 100%);
+    text-align: center; padding: 8rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  #cta-final::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+  }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95; position: relative;
+    margin-bottom: 1rem;
+  }
+  .cta-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; color: var(--text-muted);
+    margin-bottom: 3rem; position: relative;
+    letter-spacing: 0.05em;
+  }
+  .cta-micro {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); margin-top: 1.2rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem; letter-spacing: 0.15em; color: var(--gold);
+  }
+  .footer-disclaimer {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; color: var(--text-muted);
+    max-width: 500px; text-align: center; line-height: 1.5;
+  }
+  .footer-links {
+    display: flex; gap: 1.5rem; list-style: none;
+  }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── MODAL TERMOS ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 9999; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    padding: 1rem;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-content {
+    background: var(--deep-blue);
+    border: 1px solid var(--gold);
+    width: 100%; max-width: 800px; max-height: 80vh;
+    padding: 2.5rem 3rem; overflow-y: auto; position: relative;
+    transform: translateY(20px); transition: transform 0.3s ease;
+    box-shadow: 0 0 50px rgba(201,168,76,0.15);
+  }
+  .modal-overlay.active .modal-content { transform: translateY(0); }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); margin-bottom: 2rem; letter-spacing: 0.05em; line-height: 1.2; text-align: center; }
+  .modal-text {
+    font-family: 'Barlow', sans-serif; font-size: 0.95rem; color: var(--white);
+    line-height: 1.7; font-weight: 300; white-space: pre-wrap; margin-bottom: 2.5rem;
+  }
+  .modal-close-btn {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.15em;
+    background: var(--gold); color: var(--black); border: none;
+    padding: 0.8rem 2.8rem; cursor: pointer; transition: background 0.3s;
+    display: block; margin: 0 auto;
+  }
+  .modal-close-btn:hover { background: var(--gold-light); }
+
+  /* ── ANIMATED ROAD CANVAS ── */
+  canvas.road { position: absolute; inset: 0; opacity: 0.5; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .opp-grid { grid-template-columns: 1fr; }
+    .flow-grid { grid-template-columns: 1fr 1fr; }
+    .flow-grid::before { display: none; }
+    .token-grid { grid-template-columns: 1fr; }
+    .util-grid { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; gap: 2rem; }
+    .steps::before { display: none; }
+    .diff-list { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 2rem; }
+  }
+
+  @media(max-width: 600px) {
+    .flow-grid { grid-template-columns: 1fr; }
+    .geo-border { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">BODE<span>COIN</span></a>
+  <ul class="nav-links">
+    <li><a href="#opportunity">Oportunidade</a></li>
+    <li><a href="#token">Token</a></li>
+    <li><a href="#utility">Utilidade</a></li>
+    <li><a href="#join">Participar</a></li>
+  </ul>
+  <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="nav-cta">Adquirir B.D.C.</a>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <canvas class="road" id="roadCanvas"></canvas>
+
+  <div class="mascot-wrap" id="mascotWrap">
+    <img src="public/BDC.png" alt="Bode Coin Mascot">
+  </div>
+
+  <span class="hero-eyebrow reveal">Verum Wallet · Solana · B.D.C.</span>
+  <h1 class="hero-title reveal reveal-delay-1">BODE<br>COIN</h1>
+  <p class="hero-title-sub reveal reveal-delay-1">O Ativo Digital da Irmandade Moderna</p>
+  <p class="hero-subtitle reveal reveal-delay-2">Integrada à Verum Wallet — cultura, identidade e tecnologia em um ecossistema que veio para ficar.</p>
+  <div class="hero-cta-wrap reveal reveal-delay-3">
+    <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Faça Parte do Legado</a>
+    <a href="#about" class="btn-secondary">Saiba Mais</a>
+  </div>
+  <div class="scroll-hint">Explore</div>
+</section>
+
+<!-- ══════════ OPPORTUNITY ══════════ -->
+<section id="opportunity">
+  <div class="container">
+    <div class="opp-grid">
+      <div class="opp-visual reveal">
+        <img src="public/LOGO-BDC-1.png" alt="Bode Coin — Identidade Digital" style="width: 85%; display: block;">
+      </div>
+      <div class="opp-text reveal reveal-delay-1">
+        <span class="section-label">A Nova Fronteira</span>
+        <h2 class="section-title" style="text-align:left; font-size:clamp(2.2rem,4vw,3.5rem);">
+          Tokenização de<br><span class="gold-text">Comunidades Sérias</span>
+        </h2>
+        <p class="opp-quote">"Projetos com base sólida e utilidade real consolidam relevância por décadas."</p>
+        <p class="opp-body">A tokenização de comunidades autênticas é a nova fronteira do digital. Quando tradição, honestidade e tecnologia se encontram, nasce algo que vai além de um ativo — nasce um legado. O Bode Coin não é especulação. É pertencimento com utilidade real.</p>
+        <div class="badge-row">
+          <span class="badge">Mais de 2000 Anos de Filosofia</span>
+          <span class="badge">Irmandade Real</span>
+          <span class="badge">Exclusividade</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="container">
+    <span class="section-label reveal">Sobre o Projeto</span>
+    <h2 class="section-title reveal"><span class="gold-text">Da Cultura</span> ao Ecossistema Digital</h2>
+    <p class="section-intro reveal reveal-delay-1">Um fluxo contínuo que transforma identidade em ativos, comunidade em poder econômico e tradição em tecnologia de ponta.</p>
+    <div class="flow-grid">
+      <div class="flow-item reveal">
+        <div class="flow-number">01</div>
+        <div class="flow-icon">🤝</div>
+        <div class="flow-item-title">Cultura</div>
+        <div class="flow-item-desc">Tradição, honestidade e valores que constroem civilizações</div>
+      </div>
+      <div class="flow-item reveal reveal-delay-1">
+        <div class="flow-number">02</div>
+        <div class="flow-icon">🏍️</div>
+        <div class="flow-item-title">Comunidade</div>
+        <div class="flow-item-desc">Rede de parceiros confiáveis conectados por identidade comum</div>
+      </div>
+      <div class="flow-item reveal reveal-delay-2">
+        <div class="flow-number">03</div>
+        <div class="flow-icon">⛓️</div>
+        <div class="flow-item-title">Ecossistema</div>
+        <div class="flow-item-desc">Infraestrutura blockchain com utilidade prática e tangível</div>
+      </div>
+      <div class="flow-item reveal reveal-delay-3">
+        <div class="flow-number">04</div>
+        <div class="flow-icon">🪙</div>
+        <div class="flow-item-title">Ativo Digital</div>
+        <div class="flow-item-desc">Bode Coin — identidade, acesso e poder econômico unificados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TOKEN INFO ══════════ -->
+<section id="token">
+  <div class="container">
+    <span class="section-label reveal">Especificações Técnicas</span>
+    <h2 class="section-title reveal">Informações do <span class="gold-text">Token B.D.C.</span></h2>
+    <p class="section-intro reveal reveal-delay-1">Emitido na blockchain mais rápida do mundo, integrado à Verum Wallet para acesso imediato ao ecossistema.</p>
+    <div class="token-grid reveal reveal-delay-1">
+      <div class="token-card">
+        <div class="token-icon">⚡</div>
+        <div class="token-label">Blockchain</div>
+        <div class="token-value">SOLANA</div>
+        <div class="token-sub">65.000 TPS · Taxas ínfimas</div>
+      </div>
+      <div class="token-card">
+        <div class="token-icon">💼</div>
+        <div class="token-label">Carteira Integrada</div>
+        <div class="token-value">VERUM</div>
+        <div class="token-sub">Self-custody · Autocustódia total</div>
+      </div>
+      <div class="token-card">
+        <div class="token-icon">🔥</div>
+        <div class="token-label">Mecanismo</div>
+        <div class="token-value">BURN + STAKE</div>
+        <div class="token-sub">Deflação programada · Recompensa holders</div>
+      </div>
+      <div class="token-card">
+        <div class="token-icon">🎫</div>
+        <div class="token-label">Identidade Digital</div>
+        <div class="token-value">NFT MEMBRO</div>
+        <div class="token-sub">Passaporte para o ecossistema</div>
+      </div>
+      <div class="token-card">
+        <div class="token-icon">🛡️</div>
+        <div class="token-label">Padrão</div>
+        <div class="token-value">SPL TOKEN</div>
+        <div class="token-sub">Solana Program Library · Auditável</div>
+      </div>
+      <div class="token-card">
+        <div class="token-icon">🌎</div>
+        <div class="token-label">Mercado Alvo</div>
+        <div class="token-value">LATAM</div>
+        <div class="token-sub">Brasil · Paraguai · Panamá</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ UTILITY ══════════ -->
+<section id="utility">
+  <div class="container">
+    <span class="section-label reveal">Utilidade Real</span>
+    <h2 class="section-title reveal">Aplicável e <span class="gold-text">Concreto</span></h2>
+    <p class="section-intro reveal reveal-delay-1">Não é teoria. Cada função do Bode Coin existe para ser usada no mundo real, com benefícios tangíveis para membros da irmandade.</p>
+    <div class="util-grid">
+      <div class="util-card reveal">
+        <div class="util-icon">🔧</div>
+        <div class="util-title">Descontos em Oficinas</div>
+        <div class="util-desc">Parceiros verificados oferecem descontos exclusivos para holders de B.D.C. em serviços mecânicos e customização.</div>
+      </div>
+      <div class="util-card reveal reveal-delay-1">
+        <div class="util-icon">🏆</div>
+        <div class="util-title">Eventos Exclusivos</div>
+        <div class="util-desc">Acesso prioritário a encontros, rallys e eventos fechados da comunidade — apenas para membros do ecossistema.</div>
+      </div>
+      <div class="util-card reveal reveal-delay-2">
+        <div class="util-icon">🪪</div>
+        <div class="util-title">NFT de Identidade Digital</div>
+        <div class="util-desc">Seu passaporte imutável na blockchain — prova de pertencimento, status e história dentro da irmandade.</div>
+      </div>
+      <div class="util-card reveal reveal-delay-1">
+        <div class="util-icon">🛍️</div>
+        <div class="util-title">Produtos Exclusivos</div>
+        <div class="util-desc">Merchandise, equipamentos e experiências disponíveis apenas via Bode Coin — itens que não têm preço em fiat.</div>
+      </div>
+      <div class="util-card reveal reveal-delay-2">
+        <div class="util-icon">💳</div>
+        <div class="util-title">Pagamentos Verum Wallet</div>
+        <div class="util-desc">Sistema de pagamento confiável, sem intermediários e com velocidade de liquidação imediata na Solana.</div>
+      </div>
+      <div class="util-card reveal reveal-delay-3">
+        <div class="util-icon">📈</div>
+        <div class="util-title">DeFi para Membros</div>
+        <div class="util-desc">Staking estruturado, pools de liquidez e rendimentos — DeFi construído especificamente para a irmandade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ HOW TO JOIN ══════════ -->
+<section id="join">
+  <div class="container">
+    <span class="section-label reveal">Como Participar</span>
+    <h2 class="section-title reveal">5 Passos para o <span class="gold-text">Legado</span></h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Baixar Verum Wallet</div>
+        <div class="step-desc">Instale a carteira de autocustódia do ecossistema Verum Crypto</div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-title">Criar sua Wallet</div>
+        <div class="step-desc">Configure sua identidade digital na blockchain Solana com segurança total</div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-title">Adquirir B.D.C.</div>
+        <div class="step-desc">Compre Bode Coin via swap integrado ou diretamente de parceiros</div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-title">Acessar Benefícios</div>
+        <div class="step-desc">Use seus tokens para descontos, eventos e produtos exclusivos</div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">5</div>
+        <div class="step-title">Integrar à Comunidade</div>
+        <div class="step-desc">Torne-se parte da irmandade moderna — o legado começa aqui</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DIFFERENTIALS ══════════ -->
+<section id="differentials">
+  <div class="container">
+    <span class="section-label reveal">Diferenciais Estratégicos</span>
+    <h2 class="section-title reveal">Por Que o <span class="gold-text">Bode Coin</span></h2>
+    <div class="diff-list">
+      <div class="diff-item reveal">
+        <div class="diff-bullet"></div>
+        <div>
+          <div class="diff-text-title">Base Cultural Autêntica</div>
+          <div class="diff-text-desc">Filosofia e valores com mais de 2000 anos de história — não é hype, é fundação sólida que atravessa gerações.</div>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-1">
+        <div class="diff-bullet"></div>
+        <div>
+          <div class="diff-text-title">Comunidade Forte e Verificada</div>
+          <div class="diff-text-desc">Rede real de motoristas, irmandades e profissionais que conferem liquidez social e econômica ao token.</div>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-1">
+        <div class="diff-bullet"></div>
+        <div>
+          <div class="diff-text-title">Utilidade Prática e Tangível</div>
+          <div class="diff-text-desc">Cada token tem um caso de uso real — descontos, acesso, identidade. Sem promessas vazias.</div>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-2">
+        <div class="diff-bullet"></div>
+        <div>
+          <div class="diff-text-title">Crescimento Transparente</div>
+          <div class="diff-text-desc">Tokenomics com burn estruturado, vesting claro e roadmap auditável on-chain. Tudo visível para todos.</div>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-2">
+        <div class="diff-bullet"></div>
+        <div>
+          <div class="diff-text-title">Infraestrutura Verum</div>
+          <div class="diff-text-desc">Integrado ao ecossistema mais completo do mercado LatAm — wallet, DeFi, pagamentos e mais.</div>
+        </div>
+      </div>
+      <div class="diff-item reveal reveal-delay-3">
+        <div class="diff-bullet"></div>
+        <div>
+          <div class="diff-text-title">Não Para Especuladores</div>
+          <div class="diff-text-desc">Construído para membros que buscam segurança, credibilidade e pertencimento — não lucros rápidos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ VISION ══════════ -->
+<section id="vision">
+  <div class="container">
+    <div class="geo-border reveal">
+      <span class="section-label">Nossa Visão</span>
+      <p class="vision-quote">
+        "Construindo um ecossistema <span class="gold-text">seguro, duradouro</span> e respeitado — conectando <span class="gold-text">cultura, tecnologia</span> e pertencimento para as próximas gerações."
+      </p>
+      <div class="divider"></div>
+      <p style="font-family:'Barlow Condensed',sans-serif; color:var(--text-muted); font-size:1rem; font-weight:300; letter-spacing:0.05em; text-align:center;">
+        Bode Coin · Verum Crypto Ecosystem · Solana Blockchain
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA FINAL ══════════ -->
+<section id="cta-final">
+  <div class="container" style="position:relative;">
+    <span class="section-label reveal">Acesso Antecipado</span>
+    <h2 class="cta-title reveal">
+      Entre Agora e<br><span class="gold-text">Faça Parte<br>do Legado</span>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-1">Acesso antecipado a um ecossistema confiável e em expansão</p>
+    <div class="reveal reveal-delay-2">
+      <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1.3rem; padding:1.2rem 3.5rem;">Adquirir Bode Coin</a>
+    </div>
+    <p class="cta-micro reveal reveal-delay-3">Via Verum Wallet · Solana · B.D.C.</p>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-brand">BODE COIN · B.D.C.</div>
+  <p class="footer-disclaimer">
+    Este conteúdo é informativo e educativo. Não constitui recomendação financeira. Ativos digitais envolvem riscos. Verum Crypto Ecosystem © 2026.
+  </p>
+  <ul class="footer-links">
+    <li><a href="#">Verum Wallet</a></li>
+    <li><a href="#">Comunidade</a></li>
+    <li><a href="#" id="openTermsLink">Terms of Use and Privacy</a></li>
+  </ul>
+</footer>
+
+<!-- ══════════ MODAL TERMOS ══════════ -->
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-content">
+    <div class="modal-title">LEGAL NOTICE, GOVERNANCE, AND PRIVACY – BODE COIN (BDC)</div>
+    <div class="modal-text">1. MANAGING ENTITY AND JURISDICTION
+
+Bode Coin (BDC) is a digital utility asset managed administratively by Verum Wallet Freeport, a company incorporated and governed under the laws of the Republic of Panama. Any legal dispute will be settled exclusively in the courts of Panama City.
+
+2. ASSET NATURE AND RISK DISCLAIMER
+
+Utility Token: BDC is a utility token intended to foster community, engagement, and governance. It does not constitute, in any jurisdiction, a security, investment contract, or promise of profits.
+
+Volatility: The user declares awareness that digital assets have high volatility. Verum Wallet Freeport provides the technology and initial liquidity but does not guarantee appreciation, a minimum price, or mandatory buyback.
+
+3. TRANSPARENCY AND IMMUTABILITY (BLOCKCHAIN)
+
+Public Data: By using the Blockchain network to transact BDC, the user acknowledges that their wallet address (Public Key) and transaction history are public, permanent, and immutable.
+
+Right to be Forgotten: Due to the technical nature of the Blockchain, the "Right to be Forgotten" provided for in Law 81/2019 (Panama) and GDPR applies only to the centralized databases of Verum Wallet Freeport (such as marketing emails), as it is not technically possible to delete records on the decentralized network.
+
+4. DATA PROCESSING (LAW 81/2019 - PANAMA)
+
+Limited Collection: We collect personal data (such as email and name) strictly for governance purposes, ecosystem updates, and user support.
+
+Security: We implement technical protection measures to prevent unauthorized access to data collected outside the blockchain network.
+
+Legal Basis: Data processing is carried out based on the user's explicit consent upon joining the community and the legitimate interest in maintaining the network.
+
+5. CUSTODY AND SECURITY
+
+Verum Wallet Freeport recommends using Verum Wallet for managing BDC assets. The company is not responsible for assets sent to incorrect addresses, loss of private keys (seeds), or hacks in third-party wallets (Hot Wallets).</div>
+    <button class="modal-close-btn" id="closeTermsBtn">CLOSE</button>
+  </div>
+</div>
+
+<script>
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// Trigger hero immediately
+setTimeout(() => {
+  document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+}, 100);
+
+// ── MODAL TERMOS ──
+const termsModal = document.getElementById('termsModal');
+const openTermsLink = document.getElementById('openTermsLink');
+const closeTermsBtn = document.getElementById('closeTermsBtn');
+
+if(openTermsLink && termsModal && closeTermsBtn) {
+  openTermsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    termsModal.classList.add('active');
+  });
+  
+  closeTermsBtn.addEventListener('click', () => {
+    termsModal.classList.remove('active');
+  });
+  
+  // Fecha o modal ao clicar fora dele
+  termsModal.addEventListener('click', (e) => {
+    if(e.target === termsModal) {
+      termsModal.classList.remove('active');
+    }
+  });
+}
+
+// ── ROAD CANVAS ANIMATION ──
+const canvas = document.getElementById('roadCanvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const lines = [];
+const count = 18;
+
+for(let i = 0; i < count; i++) {
+  lines.push({
+    x: Math.random() * 1.4 - 0.2,
+    y: Math.random(),
+    speed: 0.0003 + Math.random() * 0.0005,
+    len: 0.05 + Math.random() * 0.12,
+    alpha: 0.05 + Math.random() * 0.15,
+    type: Math.random() > 0.5 ? 'line' : 'dot',
+    dx: (Math.random() - 0.5) * 0.001,
+  });
+}
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Vanishing point
+  const vx = W * 0.5, vy = H * 0.55;
+
+  lines.forEach(l => {
+    l.y += l.speed;
+    l.x += l.dx;
+    if(l.y > 1.2) { l.y = -0.1; l.x = Math.random() * 1.4 - 0.2; }
+    if(l.x < -0.3 || l.x > 1.3) { l.x = Math.random() * 0.6 + 0.2; l.y = 0; }
+
+    const px = l.x * W;
+    const py = l.y * H;
+
+    // Perspective from vanishing point
+    const dx = px - vx, dy = py - vy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const nx = dx/dist, ny = dy/dist;
+
+    const len = l.len * dist * 0.6;
+
+    const grd = ctx.createLinearGradient(
+      px - nx*len, py - ny*len,
+      px + nx*len, py + ny*len
+    );
+    const alpha = l.alpha * Math.min(1, dist/100);
+    grd.addColorStop(0, `rgba(201,168,76,0)`);
+    grd.addColorStop(0.5, `rgba(201,168,76,${alpha})`);
+    grd.addColorStop(1, `rgba(201,168,76,0)`);
+
+    ctx.beginPath();
+    ctx.strokeStyle = grd;
+    ctx.lineWidth = 1;
+    ctx.moveTo(px - nx*len, py - ny*len);
+    ctx.lineTo(px + nx*len, py + ny*len);
+    ctx.stroke();
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ── PARALLAX MASCOT ──
+const mascot = document.getElementById('mascotWrap');
+window.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+  if(mascot) mascot.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
+});
+</script>
+</body>
+</html>
