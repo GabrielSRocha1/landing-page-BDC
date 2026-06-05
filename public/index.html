@@ -169,6 +169,56 @@
       color: var(--black);
     }
 
+    /* ── LANGUAGE SWITCHER ── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      color: var(--text-muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.55rem;
+      cursor: pointer;
+      border-radius: 3px;
+      line-height: 1;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+    }
+
+    .lang-btn svg {
+      width: 18px;
+      height: 12px;
+      display: block;
+      border-radius: 1px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .lang-btn:hover {
+      color: var(--gold);
+      border-color: rgba(201, 168, 76, 0.6);
+    }
+
+    .lang-btn.active {
+      color: var(--black);
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
     /* ── HERO ── */
     #hero {
       position: relative;
@@ -1046,6 +1096,30 @@
         display: none;
       }
 
+      .nav-right {
+        gap: 0.7rem;
+      }
+
+      .lang-btn {
+        padding: 0.28rem 0.45rem;
+        font-size: 0.68rem;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .nav-cta {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.72rem;
+      }
+
+      .lang-btn .lang-label {
+        display: none;
+      }
+
+      .lang-btn {
+        padding: 0.3rem 0.4rem;
+      }
+
       .opp-grid {
         grid-template-columns: 1fr;
       }
@@ -1104,12 +1178,28 @@
   <nav>
     <a href="#" class="nav-logo">BODE<span>COIN</span></a>
     <ul class="nav-links">
-      <li><a href="#opportunity">Oportunidade</a></li>
-      <li><a href="#token">Token</a></li>
-      <li><a href="#utility">Utilidade</a></li>
-      <li><a href="#join">Participar</a></li>
+      <li><a href="#opportunity" data-i18n="nav.opportunity">Oportunidade</a></li>
+      <li><a href="#token" data-i18n="nav.token">Token</a></li>
+      <li><a href="#utility" data-i18n="nav.utility">Utilidade</a></li>
+      <li><a href="#join" data-i18n="nav.join">Participar</a></li>
     </ul>
-    <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="nav-cta">Adquirir B.D.C.</a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Select language">
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">
+          <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><g fill="#fff"><rect y="1.5" width="30" height="1.6"/><rect y="4.6" width="30" height="1.6"/><rect y="7.7" width="30" height="1.6"/><rect y="10.8" width="30" height="1.6"/><rect y="13.9" width="30" height="1.6"/><rect y="17" width="30" height="1.6"/></g><rect width="13" height="11" fill="#3c3b6e"/></svg>
+          <span class="lang-label">EN</span>
+        </button>
+        <button type="button" class="lang-btn" data-lang="es" aria-label="Español">
+          <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#c60b1e"/><rect y="5" width="30" height="10" fill="#ffc400"/></svg>
+          <span class="lang-label">ES</span>
+        </button>
+        <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">
+          <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009b3a"/><polygon points="15,2 28,10 15,18 2,10" fill="#fedf00"/><circle cx="15" cy="10" r="4.1" fill="#002776"/></svg>
+          <span class="lang-label">PT</span>
+        </button>
+      </div>
+      <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="nav-cta" data-i18n="nav.cta">Adquirir B.D.C.</a>
+    </div>
   </nav>
 
   <!-- ══════════ HERO ══════════ -->
@@ -1120,17 +1210,17 @@
       <img src="bode-terno.png" alt="Bode Coin Mascot">
     </div>
 
-    <span class="hero-eyebrow reveal">Blockchain · Solana · B.D.C.</span>
+    <span class="hero-eyebrow reveal" data-i18n="hero.eyebrow">Blockchain · Solana · B.D.C.</span>
     <h1 class="hero-title reveal reveal-delay-1">BODE<br>COIN</h1>
-    <p class="hero-title-sub reveal reveal-delay-1">O Ativo Digital da Irmandade Moderna</p>
-    <p class="hero-subtitle reveal reveal-delay-2">Negocie na Verum Wallet — cultura, identidade e tecnologia em um
+    <p class="hero-title-sub reveal reveal-delay-1" data-i18n="hero.subtitle">O Ativo Digital da Irmandade Moderna</p>
+    <p class="hero-subtitle reveal reveal-delay-2" data-i18n="hero.lead">Negocie na Verum Wallet — cultura, identidade e tecnologia em um
       ecossistema que veio para ficar.</p>
     <div class="hero-cta-wrap reveal reveal-delay-3">
-      <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Faça Parte do
+      <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="btn-primary" data-i18n="hero.ctaPrimary">Faça Parte do
         Legado</a>
-      <a href="#about" class="btn-secondary">Saiba Mais</a>
+      <a href="#about" class="btn-secondary" data-i18n="hero.ctaSecondary">Saiba Mais</a>
     </div>
-    <div class="scroll-hint">Explore</div>
+    <div class="scroll-hint" data-i18n="hero.scroll">Explore</div>
   </section>
 
   <!-- ══════════ OPPORTUNITY ══════════ -->
@@ -1141,18 +1231,18 @@
           <img src="1200x1200.png" alt="Bode Coin — Identidade Digital" style="width: 85%; display: block;">
         </div>
         <div class="opp-text reveal reveal-delay-1">
-          <span class="section-label">A Nova Fronteira</span>
-          <h2 class="section-title" style="text-align:left; font-size:clamp(2.2rem,4vw,3.5rem);">
+          <span class="section-label" data-i18n="opp.label">A Nova Fronteira</span>
+          <h2 class="section-title" style="text-align:left; font-size:clamp(2.2rem,4vw,3.5rem);" data-i18n="opp.title">
             Tokenização de<br><span class="gold-text">Comunidades Sérias</span>
           </h2>
-          <p class="opp-quote">"Projetos com base sólida e utilidade real consolidam relevância por décadas."</p>
-          <p class="opp-body">A tokenização de comunidades autênticas é a nova fronteira do digital. Quando tradição,
+          <p class="opp-quote" data-i18n="opp.quote">"Projetos com base sólida e utilidade real consolidam relevância por décadas."</p>
+          <p class="opp-body" data-i18n="opp.body">A tokenização de comunidades autênticas é a nova fronteira do digital. Quando tradição,
             honestidade e tecnologia se encontram, nasce algo que vai além de um ativo — nasce um legado. A Bode Coin
             não é especulação. É pertencimento com utilidade real.</p>
           <div class="badge-row">
-            <span class="badge">Mais de 2000 Anos de Filosofia</span>
-            <span class="badge">Irmandade Real</span>
-            <span class="badge">Exclusividade</span>
+            <span class="badge" data-i18n="opp.badge1">Mais de 2000 Anos de Filosofia</span>
+            <span class="badge" data-i18n="opp.badge2">Irmandade Real</span>
+            <span class="badge" data-i18n="opp.badge3">Exclusividade</span>
           </div>
         </div>
       </div>
@@ -1162,34 +1252,34 @@
   <!-- ══════════ ABOUT ══════════ -->
   <section id="about">
     <div class="container">
-      <span class="section-label reveal">Sobre o Projeto</span>
-      <h2 class="section-title reveal"><span class="gold-text">Da Cultura</span> ao Ecossistema Digital</h2>
-      <p class="section-intro reveal reveal-delay-1">Um fluxo contínuo que transforma identidade em ativos, comunidade
+      <span class="section-label reveal" data-i18n="about.label">Sobre o Projeto</span>
+      <h2 class="section-title reveal" data-i18n="about.title"><span class="gold-text">Da Cultura</span> ao Ecossistema Digital</h2>
+      <p class="section-intro reveal reveal-delay-1" data-i18n="about.intro">Um fluxo contínuo que transforma identidade em ativos, comunidade
         em poder econômico e tradição em tecnologia de ponta.</p>
       <div class="flow-grid">
         <div class="flow-item reveal">
           <div class="flow-number">01</div>
           <div class="flow-icon">🤝</div>
-          <div class="flow-item-title">Cultura</div>
-          <div class="flow-item-desc">Tradição, honestidade e valores que constroem civilizações</div>
+          <div class="flow-item-title" data-i18n="flow1.title">Cultura</div>
+          <div class="flow-item-desc" data-i18n="flow1.desc">Tradição, honestidade e valores que constroem civilizações</div>
         </div>
         <div class="flow-item reveal reveal-delay-1">
           <div class="flow-number">02</div>
           <div class="flow-icon"><img src="esquadro-compasso.png" alt="Comunidade" style="width: 34px; height: 34px; object-fit: contain;"></div>
-          <div class="flow-item-title">Comunidade</div>
-          <div class="flow-item-desc">Rede de parceiros confiáveis conectados por identidade comum</div>
+          <div class="flow-item-title" data-i18n="flow2.title">Comunidade</div>
+          <div class="flow-item-desc" data-i18n="flow2.desc">Rede de parceiros confiáveis conectados por identidade comum</div>
         </div>
         <div class="flow-item reveal reveal-delay-2">
           <div class="flow-number">03</div>
           <div class="flow-icon">⛓️</div>
-          <div class="flow-item-title">Ecossistema</div>
-          <div class="flow-item-desc">Infraestrutura blockchain com utilidade prática e tangível</div>
+          <div class="flow-item-title" data-i18n="flow3.title">Ecossistema</div>
+          <div class="flow-item-desc" data-i18n="flow3.desc">Infraestrutura blockchain com utilidade prática e tangível</div>
         </div>
         <div class="flow-item reveal reveal-delay-3">
           <div class="flow-number">04</div>
           <div class="flow-icon">🪙</div>
-          <div class="flow-item-title">Ativo Digital</div>
-          <div class="flow-item-desc">Bode Coin — identidade, acesso e poder econômico unificados</div>
+          <div class="flow-item-title" data-i18n="flow4.title">Ativo Digital</div>
+          <div class="flow-item-desc" data-i18n="flow4.desc">Bode Coin — identidade, acesso e poder econômico unificados</div>
         </div>
       </div>
     </div>
@@ -1198,28 +1288,28 @@
   <!-- ══════════ TOKEN INFO ══════════ -->
   <section id="token">
     <div class="container">
-      <span class="section-label reveal">Especificações Técnicas</span>
-      <h2 class="section-title reveal">Informações do <span class="gold-text">Token B.D.C.</span></h2>
-      <p class="section-intro reveal reveal-delay-1">Emitido na blockchain mais rápida do mundo, negocie na Verum
+      <span class="section-label reveal" data-i18n="token.label">Especificações Técnicas</span>
+      <h2 class="section-title reveal" data-i18n="token.title">Informações do <span class="gold-text">Token B.D.C.</span></h2>
+      <p class="section-intro reveal reveal-delay-1" data-i18n="token.intro">Emitido na blockchain mais rápida do mundo, negocie na Verum
         Wallet para acesso imediato ao ecossistema.</p>
       <div class="token-grid reveal reveal-delay-1">
         <div class="token-card">
           <div class="token-icon">⚡</div>
-          <div class="token-label">Blockchain</div>
+          <div class="token-label" data-i18n="token.c1label">Blockchain</div>
           <div class="token-value">SOLANA</div>
-          <div class="token-sub">65.000 TPS · Taxas ínfimas</div>
+          <div class="token-sub" data-i18n="token.c1sub">65.000 TPS · Taxas ínfimas</div>
         </div>
         <div class="token-card">
           <div class="token-icon">💼</div>
-          <div class="token-label">Negocie na Carteira</div>
+          <div class="token-label" data-i18n="token.c2label">Negocie na Carteira</div>
           <div class="token-value">VERUM</div>
-          <div class="token-sub">Self-custody · Autocustódia total</div>
+          <div class="token-sub" data-i18n="token.c2sub">Self-custody · Autocustódia total</div>
         </div>
         <div class="token-card">
           <div class="token-icon">🛡️</div>
-          <div class="token-label">Padrão</div>
+          <div class="token-label" data-i18n="token.c3label">Padrão</div>
           <div class="token-value">SPL TOKEN</div>
-          <div class="token-sub">Solana Program Library · Auditável</div>
+          <div class="token-sub" data-i18n="token.c3sub">Solana Program Library · Auditável</div>
         </div>
       </div>
     </div>
@@ -1228,44 +1318,44 @@
   <!-- ══════════ UTILITY ══════════ -->
   <section id="utility">
     <div class="container">
-      <span class="section-label reveal">Utilidade Real</span>
-      <h2 class="section-title reveal">Aplicável e <span class="gold-text">Concreto</span></h2>
-      <p class="section-intro reveal reveal-delay-1">Não é teoria. Cada função da Bode Coin existe para ser usada no
+      <span class="section-label reveal" data-i18n="util.label">Utilidade Real</span>
+      <h2 class="section-title reveal" data-i18n="util.title">Aplicável e <span class="gold-text">Concreto</span></h2>
+      <p class="section-intro reveal reveal-delay-1" data-i18n="util.intro">Não é teoria. Cada função da Bode Coin existe para ser usada no
         mundo real, com benefícios tangíveis para membros da irmandade.</p>
       <div class="util-grid">
         <div class="util-card reveal">
           <div class="util-icon">🏷️</div>
-          <div class="util-title">Benefícios</div>
-          <div class="util-desc">Parceiros oferecem descontos exclusivos para pagamento em ativos da comunidade BodeCoin
+          <div class="util-title" data-i18n="util1.title">Benefícios</div>
+          <div class="util-desc" data-i18n="util1.desc">Parceiros oferecem descontos exclusivos para pagamento em ativos da comunidade BodeCoin
             em Produtos ou Serviços.</div>
         </div>
         <div class="util-card reveal reveal-delay-1">
           <div class="util-icon">🔗</div>
-          <div class="util-title">Rede Global</div>
-          <div class="util-desc">Conectando investidores de diversos capítulos pelo mundo.</div>
+          <div class="util-title" data-i18n="util2.title">Rede Global</div>
+          <div class="util-desc" data-i18n="util2.desc">Conectando investidores de diversos capítulos pelo mundo.</div>
         </div>
         <div class="util-card reveal reveal-delay-2">
           <div class="util-icon">📈</div>
-          <div class="util-title">Investimento & Valor</div>
-          <div class="util-desc">Um ativo digital que cresce junto com a força da nossa comunidade e expansão da
+          <div class="util-title" data-i18n="util3.title">Investimento & Valor</div>
+          <div class="util-desc" data-i18n="util3.desc">Um ativo digital que cresce junto com a força da nossa comunidade e expansão da
             marca.</div>
         </div>
         <div class="util-card reveal reveal-delay-1">
           <div class="util-icon">🛍️</div>
-          <div class="util-title">Produtos Exclusivos</div>
-          <div class="util-desc">Merchandise, equipamentos e experiências disponíveis apenas via Bode Coin — itens que
+          <div class="util-title" data-i18n="util4.title">Produtos Exclusivos</div>
+          <div class="util-desc" data-i18n="util4.desc">Merchandise, equipamentos e experiências disponíveis apenas via Bode Coin — itens que
             não têm preço em fiat.</div>
         </div>
         <div class="util-card reveal reveal-delay-2">
           <div class="util-icon">🔄</div>
-          <div class="util-title">Transferências P2P</div>
-          <div class="util-desc">Transfira ativos diretamente para outros membros on-chain usando infraestrutura
+          <div class="util-title" data-i18n="util5.title">Transferências P2P</div>
+          <div class="util-desc" data-i18n="util5.desc">Transfira ativos diretamente para outros membros on-chain usando infraestrutura
             de software não custodial.</div>
         </div>
         <div class="util-card reveal reveal-delay-3">
           <div class="util-icon">🌐</div>
-          <div class="util-title">Acesso Web3</div>
-          <div class="util-desc">Interaja diretamente com protocolos descentralizados na rede Solana de forma autônoma
+          <div class="util-title" data-i18n="util6.title">Acesso Web3</div>
+          <div class="util-desc" data-i18n="util6.desc">Interaja diretamente com protocolos descentralizados na rede Solana de forma autônoma
             e não custodial.</div>
         </div>
       </div>
@@ -1275,33 +1365,33 @@
   <!-- ══════════ HOW TO JOIN ══════════ -->
   <section id="join">
     <div class="container">
-      <span class="section-label reveal">Como Participar</span>
-      <h2 class="section-title reveal">5 Passos para o <span class="gold-text">Legado</span></h2>
+      <span class="section-label reveal" data-i18n="join.label">Como Participar</span>
+      <h2 class="section-title reveal" data-i18n="join.title">5 Passos para o <span class="gold-text">Legado</span></h2>
       <div class="steps">
         <div class="step reveal">
           <div class="step-num">1</div>
-          <div class="step-title">Baixar Verum Wallet</div>
-          <div class="step-desc">Instale a carteira de autocustódia do ecossistema Verum Crypto</div>
+          <div class="step-title" data-i18n="step1.title">Baixar Verum Wallet</div>
+          <div class="step-desc" data-i18n="step1.desc">Instale a carteira de autocustódia do ecossistema Verum Crypto</div>
         </div>
         <div class="step reveal reveal-delay-1">
           <div class="step-num">2</div>
-          <div class="step-title">Criar sua Wallet</div>
-          <div class="step-desc">Configure sua identidade digital na blockchain Solana com segurança total</div>
+          <div class="step-title" data-i18n="step2.title">Criar sua Wallet</div>
+          <div class="step-desc" data-i18n="step2.desc">Configure sua identidade digital na blockchain Solana com segurança total</div>
         </div>
         <div class="step reveal reveal-delay-2">
           <div class="step-num">3</div>
-          <div class="step-title">Acessar B.D.C.</div>
-          <div class="step-desc">Acesse B.D.C. interagindo com protocolos de troca descentralizados (DEX) pelo navegador de dApps</div>
+          <div class="step-title" data-i18n="step3.title">Acessar B.D.C.</div>
+          <div class="step-desc" data-i18n="step3.desc">Acesse B.D.C. interagindo com protocolos de troca descentralizados (DEX) pelo navegador de dApps</div>
         </div>
         <div class="step reveal reveal-delay-3">
           <div class="step-num">4</div>
-          <div class="step-title">Acessar Benefícios</div>
-          <div class="step-desc">Use seus tokens para descontos, eventos e produtos exclusivos</div>
+          <div class="step-title" data-i18n="step4.title">Acessar Benefícios</div>
+          <div class="step-desc" data-i18n="step4.desc">Use seus tokens para descontos, eventos e produtos exclusivos</div>
         </div>
         <div class="step reveal reveal-delay-3">
           <div class="step-num">5</div>
-          <div class="step-title">Integrar à Comunidade</div>
-          <div class="step-desc">Torne-se parte da irmandade moderna — o legado começa aqui</div>
+          <div class="step-title" data-i18n="step5.title">Integrar à Comunidade</div>
+          <div class="step-desc" data-i18n="step5.desc">Torne-se parte da irmandade moderna — o legado começa aqui</div>
         </div>
       </div>
     </div>
@@ -1310,46 +1400,46 @@
   <!-- ══════════ DIFFERENTIALS ══════════ -->
   <section id="differentials">
     <div class="container">
-      <span class="section-label reveal">Diferenciais Estratégicos</span>
-      <h2 class="section-title reveal">Por Que a <span class="gold-text">Bode Coin</span></h2>
+      <span class="section-label reveal" data-i18n="diff.label">Diferenciais Estratégicos</span>
+      <h2 class="section-title reveal" data-i18n="diff.title">Por Que a <span class="gold-text">Bode Coin</span></h2>
       <div class="diff-list">
         <div class="diff-item reveal">
           <div class="diff-bullet"></div>
           <div>
-            <div class="diff-text-title">Base Cultural Autêntica</div>
-            <div class="diff-text-desc">Filosofia e valores com mais de 2000 anos de história — não é hype, é fundação
+            <div class="diff-text-title" data-i18n="diff1.title">Base Cultural Autêntica</div>
+            <div class="diff-text-desc" data-i18n="diff1.desc">Filosofia e valores com mais de 2000 anos de história — não é hype, é fundação
               sólida que atravessa gerações.</div>
           </div>
         </div>
         <div class="diff-item reveal reveal-delay-1">
           <div class="diff-bullet"></div>
           <div>
-            <div class="diff-text-title">Comunidade Forte e Verificada</div>
-            <div class="diff-text-desc">Rede real dos bodes, irmandade e profissionais que conferem liquidez social
+            <div class="diff-text-title" data-i18n="diff2.title">Comunidade Forte e Verificada</div>
+            <div class="diff-text-desc" data-i18n="diff2.desc">Rede real dos bodes, irmandade e profissionais que conferem liquidez social
               e econômica ao token.</div>
           </div>
         </div>
         <div class="diff-item reveal reveal-delay-1">
           <div class="diff-bullet"></div>
           <div>
-            <div class="diff-text-title">Utilidade Prática e Tangível</div>
-            <div class="diff-text-desc">Cada token tem um caso de uso real — descontos, acesso, identidade. Sem
+            <div class="diff-text-title" data-i18n="diff3.title">Utilidade Prática e Tangível</div>
+            <div class="diff-text-desc" data-i18n="diff3.desc">Cada token tem um caso de uso real — descontos, acesso, identidade. Sem
               promessas vazias.</div>
           </div>
         </div>
         <div class="diff-item reveal reveal-delay-2">
           <div class="diff-bullet"></div>
           <div>
-            <div class="diff-text-title">Crescimento Transparente</div>
-            <div class="diff-text-desc">Tokenomics transparente, vesting claro e roadmap auditável on-chain.
+            <div class="diff-text-title" data-i18n="diff4.title">Crescimento Transparente</div>
+            <div class="diff-text-desc" data-i18n="diff4.desc">Tokenomics transparente, vesting claro e roadmap auditável on-chain.
               Tudo visível para todos.</div>
           </div>
         </div>
         <div class="diff-item reveal reveal-delay-2">
           <div class="diff-bullet"></div>
           <div>
-            <div class="diff-text-title">Ecossistema de Confiança</div>
-            <div class="diff-text-desc">Mais do que uma moeda, um símbolo da nossa união. Criamos um sistema de
+            <div class="diff-text-title" data-i18n="diff5.title">Ecossistema de Confiança</div>
+            <div class="diff-text-desc" data-i18n="diff5.desc">Mais do que uma moeda, um símbolo da nossa união. Criamos um sistema de
               utilidade prática que facilita as interações e o apoio entre os membros, sempre pautado pela
               credibilidade e pela força que só uma verdadeira irmandade possui.</div>
           </div>
@@ -1357,8 +1447,8 @@
         <div class="diff-item reveal reveal-delay-3">
           <div class="diff-bullet"></div>
           <div>
-            <div class="diff-text-title">Valor Focado no Pertencimento</div>
-            <div class="diff-text-desc">O nosso verdadeiro valor está na segurança de estarmos entre irmãos, utilizando
+            <div class="diff-text-title" data-i18n="diff6.title">Valor Focado no Pertencimento</div>
+            <div class="diff-text-desc" data-i18n="diff6.desc">O nosso verdadeiro valor está na segurança de estarmos entre irmãos, utilizando
               a moeda como uma ferramenta de acesso e utilidade no dia a dia da comunidade. Aprende, Investe e
               Cresce.</div>
           </div>
@@ -1371,13 +1461,13 @@
   <section id="vision">
     <div class="container">
       <div class="geo-border reveal">
-        <span class="section-label">Nossa Visão</span>
-        <p class="vision-quote">
+        <span class="section-label" data-i18n="vision.label">Nossa Visão</span>
+        <p class="vision-quote" data-i18n="vision.quote">
           "Construindo um ecossistema <span class="gold-text">seguro, duradouro</span> e respeitado — conectando <span
             class="gold-text">cultura, tecnologia</span> e pertencimento para as próximas gerações."
         </p>
         <div class="divider"></div>
-        <p
+        <p data-i18n="vision.footer"
           style="font-family:'Barlow Condensed',sans-serif; color:var(--text-muted); font-size:1rem; font-weight:300; letter-spacing:0.05em; text-align:center;">
           Bode Coin · Solana Blockchain
         </p>
@@ -1388,29 +1478,29 @@
   <!-- ══════════ CTA FINAL ══════════ -->
   <section id="cta-final">
     <div class="container" style="position:relative;">
-      <span class="section-label reveal">Acesso Antecipado</span>
-      <h2 class="cta-title reveal">
+      <span class="section-label reveal" data-i18n="cta.label">Acesso Antecipado</span>
+      <h2 class="cta-title reveal" data-i18n="cta.title">
         Entre Agora e<br><span class="gold-text">Faça Parte<br>do Legado</span>
       </h2>
-      <p class="cta-sub reveal reveal-delay-1">Acesso antecipado a um ecossistema confiável e em expansão</p>
+      <p class="cta-sub reveal reveal-delay-1" data-i18n="cta.sub">Acesso antecipado a um ecossistema confiável e em expansão</p>
       <div class="reveal reveal-delay-2">
         <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="btn-primary"
-          style="font-size:1.3rem; padding:1.2rem 3.5rem;">Adquirir Bode Coin</a>
+          style="font-size:1.3rem; padding:1.2rem 3.5rem;" data-i18n="cta.btn">Adquirir Bode Coin</a>
       </div>
-      <p class="cta-micro reveal reveal-delay-3">Blockchain · Solana · B.D.C.</p>
+      <p class="cta-micro reveal reveal-delay-3" data-i18n="cta.micro">Blockchain · Solana · B.D.C.</p>
     </div>
   </section>
 
   <!-- ══════════ FOOTER ══════════ -->
   <footer>
     <div class="footer-brand">BODE COIN · B.D.C.</div>
-    <p class="footer-disclaimer">
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer">
       Este conteúdo é informativo e educativo. Não constitui recomendação financeira. Ativos digitais envolvem riscos.
       Bode Coin © 2026.
     </p>
     <ul class="footer-links">
-      <li><a href="#">Comunidade</a></li>
-      <li><a href="#" id="openTermsLink">Terms of Use and Privacy</a></li>
+      <li><a href="#" data-i18n="footer.community">Comunidade</a></li>
+      <li><a href="#" id="openTermsLink" data-i18n="footer.terms">Terms of Use and Privacy</a></li>
     </ul>
   </footer>
 
@@ -1459,11 +1549,324 @@
         Verum Wallet Freeport recommends using Verum Wallet for managing BDC assets. The company is not responsible for
         assets sent to incorrect addresses, loss of private keys (seeds), or hacks in third-party wallets (Hot Wallets).
       </div>
-      <button class="modal-close-btn" id="closeTermsBtn">CLOSE</button>
+      <button class="modal-close-btn" id="closeTermsBtn" data-i18n="modal.close">CLOSE</button>
     </div>
   </div>
 
   <script>
+    // ══════════ I18N / LANGUAGE SWITCHER ══════════
+    const I18N = {
+      pt: {
+        'meta.title': 'Bode Coin — O Ativo Digital da Irmandade Moderna',
+        'nav.opportunity': 'Oportunidade',
+        'nav.token': 'Token',
+        'nav.utility': 'Utilidade',
+        'nav.join': 'Participar',
+        'nav.cta': 'Adquirir B.D.C.',
+        'hero.eyebrow': 'Blockchain · Solana · B.D.C.',
+        'hero.subtitle': 'O Ativo Digital da Irmandade Moderna',
+        'hero.lead': 'Negocie na Verum Wallet — cultura, identidade e tecnologia em um ecossistema que veio para ficar.',
+        'hero.ctaPrimary': 'Faça Parte do Legado',
+        'hero.ctaSecondary': 'Saiba Mais',
+        'hero.scroll': 'Explore',
+        'opp.label': 'A Nova Fronteira',
+        'opp.title': 'Tokenização de<br><span class="gold-text">Comunidades Sérias</span>',
+        'opp.quote': '"Projetos com base sólida e utilidade real consolidam relevância por décadas."',
+        'opp.body': 'A tokenização de comunidades autênticas é a nova fronteira do digital. Quando tradição, honestidade e tecnologia se encontram, nasce algo que vai além de um ativo — nasce um legado. A Bode Coin não é especulação. É pertencimento com utilidade real.',
+        'opp.badge1': 'Mais de 2000 Anos de Filosofia',
+        'opp.badge2': 'Irmandade Real',
+        'opp.badge3': 'Exclusividade',
+        'about.label': 'Sobre o Projeto',
+        'about.title': '<span class="gold-text">Da Cultura</span> ao Ecossistema Digital',
+        'about.intro': 'Um fluxo contínuo que transforma identidade em ativos, comunidade em poder econômico e tradição em tecnologia de ponta.',
+        'flow1.title': 'Cultura',
+        'flow1.desc': 'Tradição, honestidade e valores que constroem civilizações',
+        'flow2.title': 'Comunidade',
+        'flow2.desc': 'Rede de parceiros confiáveis conectados por identidade comum',
+        'flow3.title': 'Ecossistema',
+        'flow3.desc': 'Infraestrutura blockchain com utilidade prática e tangível',
+        'flow4.title': 'Ativo Digital',
+        'flow4.desc': 'Bode Coin — identidade, acesso e poder econômico unificados',
+        'token.label': 'Especificações Técnicas',
+        'token.title': 'Informações do <span class="gold-text">Token B.D.C.</span>',
+        'token.intro': 'Emitido na blockchain mais rápida do mundo, negocie na Verum Wallet para acesso imediato ao ecossistema.',
+        'token.c1label': 'Blockchain',
+        'token.c1sub': '65.000 TPS · Taxas ínfimas',
+        'token.c2label': 'Negocie na Carteira',
+        'token.c2sub': 'Self-custody · Autocustódia total',
+        'token.c3label': 'Padrão',
+        'token.c3sub': 'Solana Program Library · Auditável',
+        'util.label': 'Utilidade Real',
+        'util.title': 'Aplicável e <span class="gold-text">Concreto</span>',
+        'util.intro': 'Não é teoria. Cada função da Bode Coin existe para ser usada no mundo real, com benefícios tangíveis para membros da irmandade.',
+        'util1.title': 'Benefícios',
+        'util1.desc': 'Parceiros oferecem descontos exclusivos para pagamento em ativos da comunidade BodeCoin em Produtos ou Serviços.',
+        'util2.title': 'Rede Global',
+        'util2.desc': 'Conectando investidores de diversos capítulos pelo mundo.',
+        'util3.title': 'Investimento & Valor',
+        'util3.desc': 'Um ativo digital que cresce junto com a força da nossa comunidade e expansão da marca.',
+        'util4.title': 'Produtos Exclusivos',
+        'util4.desc': 'Merchandise, equipamentos e experiências disponíveis apenas via Bode Coin — itens que não têm preço em fiat.',
+        'util5.title': 'Transferências P2P',
+        'util5.desc': 'Transfira ativos diretamente para outros membros on-chain usando infraestrutura de software não custodial.',
+        'util6.title': 'Acesso Web3',
+        'util6.desc': 'Interaja diretamente com protocolos descentralizados na rede Solana de forma autônoma e não custodial.',
+        'join.label': 'Como Participar',
+        'join.title': '5 Passos para o <span class="gold-text">Legado</span>',
+        'step1.title': 'Baixar Verum Wallet',
+        'step1.desc': 'Instale a carteira de autocustódia do ecossistema Verum Crypto',
+        'step2.title': 'Criar sua Wallet',
+        'step2.desc': 'Configure sua identidade digital na blockchain Solana com segurança total',
+        'step3.title': 'Acessar B.D.C.',
+        'step3.desc': 'Acesse B.D.C. interagindo com protocolos de troca descentralizados (DEX) pelo navegador de dApps',
+        'step4.title': 'Acessar Benefícios',
+        'step4.desc': 'Use seus tokens para descontos, eventos e produtos exclusivos',
+        'step5.title': 'Integrar à Comunidade',
+        'step5.desc': 'Torne-se parte da irmandade moderna — o legado começa aqui',
+        'diff.label': 'Diferenciais Estratégicos',
+        'diff.title': 'Por Que a <span class="gold-text">Bode Coin</span>',
+        'diff1.title': 'Base Cultural Autêntica',
+        'diff1.desc': 'Filosofia e valores com mais de 2000 anos de história — não é hype, é fundação sólida que atravessa gerações.',
+        'diff2.title': 'Comunidade Forte e Verificada',
+        'diff2.desc': 'Rede real dos bodes, irmandade e profissionais que conferem liquidez social e econômica ao token.',
+        'diff3.title': 'Utilidade Prática e Tangível',
+        'diff3.desc': 'Cada token tem um caso de uso real — descontos, acesso, identidade. Sem promessas vazias.',
+        'diff4.title': 'Crescimento Transparente',
+        'diff4.desc': 'Tokenomics transparente, vesting claro e roadmap auditável on-chain. Tudo visível para todos.',
+        'diff5.title': 'Ecossistema de Confiança',
+        'diff5.desc': 'Mais do que uma moeda, um símbolo da nossa união. Criamos um sistema de utilidade prática que facilita as interações e o apoio entre os membros, sempre pautado pela credibilidade e pela força que só uma verdadeira irmandade possui.',
+        'diff6.title': 'Valor Focado no Pertencimento',
+        'diff6.desc': 'O nosso verdadeiro valor está na segurança de estarmos entre irmãos, utilizando a moeda como uma ferramenta de acesso e utilidade no dia a dia da comunidade. Aprende, Investe e Cresce.',
+        'vision.label': 'Nossa Visão',
+        'vision.quote': '"Construindo um ecossistema <span class="gold-text">seguro, duradouro</span> e respeitado — conectando <span class="gold-text">cultura, tecnologia</span> e pertencimento para as próximas gerações."',
+        'vision.footer': 'Bode Coin · Solana Blockchain',
+        'cta.label': 'Acesso Antecipado',
+        'cta.title': 'Entre Agora e<br><span class="gold-text">Faça Parte<br>do Legado</span>',
+        'cta.sub': 'Acesso antecipado a um ecossistema confiável e em expansão',
+        'cta.btn': 'Adquirir Bode Coin',
+        'cta.micro': 'Blockchain · Solana · B.D.C.',
+        'footer.disclaimer': 'Este conteúdo é informativo e educativo. Não constitui recomendação financeira. Ativos digitais envolvem riscos. Bode Coin © 2026.',
+        'footer.community': 'Comunidade',
+        'footer.terms': 'Termos de Uso e Privacidade',
+        'modal.close': 'FECHAR'
+      },
+      en: {
+        'meta.title': 'Bode Coin — The Digital Asset of the Modern Brotherhood',
+        'nav.opportunity': 'Opportunity',
+        'nav.token': 'Token',
+        'nav.utility': 'Utility',
+        'nav.join': 'Join',
+        'nav.cta': 'Get B.D.C.',
+        'hero.eyebrow': 'Blockchain · Solana · B.D.C.',
+        'hero.subtitle': 'The Digital Asset of the Modern Brotherhood',
+        'hero.lead': 'Trade on Verum Wallet — culture, identity and technology in an ecosystem built to last.',
+        'hero.ctaPrimary': 'Join the Legacy',
+        'hero.ctaSecondary': 'Learn More',
+        'hero.scroll': 'Explore',
+        'opp.label': 'The New Frontier',
+        'opp.title': 'Tokenizing<br><span class="gold-text">Serious Communities</span>',
+        'opp.quote': '"Projects with a solid foundation and real utility hold relevance for decades."',
+        'opp.body': 'The tokenization of authentic communities is the new digital frontier. When tradition, honesty and technology meet, something beyond an asset is born — a legacy is born. Bode Coin is not speculation. It is belonging with real utility.',
+        'opp.badge1': 'Over 2000 Years of Philosophy',
+        'opp.badge2': 'A Real Brotherhood',
+        'opp.badge3': 'Exclusivity',
+        'about.label': 'About the Project',
+        'about.title': '<span class="gold-text">From Culture</span> to a Digital Ecosystem',
+        'about.intro': 'A continuous flow that turns identity into assets, community into economic power, and tradition into cutting-edge technology.',
+        'flow1.title': 'Culture',
+        'flow1.desc': 'Tradition, honesty and values that build civilizations',
+        'flow2.title': 'Community',
+        'flow2.desc': 'A network of trusted partners connected by a shared identity',
+        'flow3.title': 'Ecosystem',
+        'flow3.desc': 'Blockchain infrastructure with practical, tangible utility',
+        'flow4.title': 'Digital Asset',
+        'flow4.desc': 'Bode Coin — identity, access and economic power unified',
+        'token.label': 'Technical Specifications',
+        'token.title': '<span class="gold-text">B.D.C. Token</span> Information',
+        'token.intro': 'Issued on the fastest blockchain in the world, trade on Verum Wallet for instant access to the ecosystem.',
+        'token.c1label': 'Blockchain',
+        'token.c1sub': '65,000 TPS · Minimal fees',
+        'token.c2label': 'Trade on Wallet',
+        'token.c2sub': 'Self-custody · Full self-custody',
+        'token.c3label': 'Standard',
+        'token.c3sub': 'Solana Program Library · Auditable',
+        'util.label': 'Real Utility',
+        'util.title': 'Applicable and <span class="gold-text">Concrete</span>',
+        'util.intro': 'It is not theory. Every Bode Coin function exists to be used in the real world, with tangible benefits for members of the brotherhood.',
+        'util1.title': 'Benefits',
+        'util1.desc': 'Partners offer exclusive discounts for payment in BodeCoin community assets on products or services.',
+        'util2.title': 'Global Network',
+        'util2.desc': 'Connecting investors from chapters all around the world.',
+        'util3.title': 'Investment & Value',
+        'util3.desc': 'A digital asset that grows alongside the strength of our community and the expansion of the brand.',
+        'util4.title': 'Exclusive Products',
+        'util4.desc': 'Merchandise, equipment and experiences available only via Bode Coin — items that have no price in fiat.',
+        'util5.title': 'P2P Transfers',
+        'util5.desc': 'Transfer assets directly to other members on-chain using non-custodial software infrastructure.',
+        'util6.title': 'Web3 Access',
+        'util6.desc': 'Interact directly with decentralized protocols on the Solana network in an autonomous, non-custodial way.',
+        'join.label': 'How to Join',
+        'join.title': '5 Steps to the <span class="gold-text">Legacy</span>',
+        'step1.title': 'Download Verum Wallet',
+        'step1.desc': 'Install the self-custody wallet of the Verum Crypto ecosystem',
+        'step2.title': 'Create your Wallet',
+        'step2.desc': 'Set up your digital identity on the Solana blockchain with full security',
+        'step3.title': 'Access B.D.C.',
+        'step3.desc': 'Access B.D.C. by interacting with decentralized exchange protocols (DEX) through the dApp browser',
+        'step4.title': 'Access Benefits',
+        'step4.desc': 'Use your tokens for discounts, events and exclusive products',
+        'step5.title': 'Join the Community',
+        'step5.desc': 'Become part of the modern brotherhood — the legacy begins here',
+        'diff.label': 'Strategic Differentiators',
+        'diff.title': 'Why <span class="gold-text">Bode Coin</span>',
+        'diff1.title': 'Authentic Cultural Foundation',
+        'diff1.desc': 'Philosophy and values with over 2000 years of history — not hype, but a solid foundation that spans generations.',
+        'diff2.title': 'Strong, Verified Community',
+        'diff2.desc': 'A real network of members, brotherhood and professionals who give the token social and economic liquidity.',
+        'diff3.title': 'Practical, Tangible Utility',
+        'diff3.desc': 'Every token has a real use case — discounts, access, identity. No empty promises.',
+        'diff4.title': 'Transparent Growth',
+        'diff4.desc': 'Transparent tokenomics, clear vesting and an on-chain auditable roadmap. Everything visible to everyone.',
+        'diff5.title': 'An Ecosystem of Trust',
+        'diff5.desc': 'More than a coin, a symbol of our union. We created a system of practical utility that facilitates interactions and support among members, always guided by the credibility and strength that only a true brotherhood possesses.',
+        'diff6.title': 'Value Focused on Belonging',
+        'diff6.desc': 'Our true value lies in the security of being among brothers, using the coin as a tool for access and utility in the community\'s daily life. Learn, Invest and Grow.',
+        'vision.label': 'Our Vision',
+        'vision.quote': '"Building a <span class="gold-text">secure, lasting</span> and respected ecosystem — connecting <span class="gold-text">culture, technology</span> and belonging for the next generations."',
+        'vision.footer': 'Bode Coin · Solana Blockchain',
+        'cta.label': 'Early Access',
+        'cta.title': 'Join Now and<br><span class="gold-text">Become Part<br>of the Legacy</span>',
+        'cta.sub': 'Early access to a trusted and expanding ecosystem',
+        'cta.btn': 'Get Bode Coin',
+        'cta.micro': 'Blockchain · Solana · B.D.C.',
+        'footer.disclaimer': 'This content is informative and educational. It does not constitute financial advice. Digital assets involve risks. Bode Coin © 2026.',
+        'footer.community': 'Community',
+        'footer.terms': 'Terms of Use and Privacy',
+        'modal.close': 'CLOSE'
+      },
+      es: {
+        'meta.title': 'Bode Coin — El Activo Digital de la Hermandad Moderna',
+        'nav.opportunity': 'Oportunidad',
+        'nav.token': 'Token',
+        'nav.utility': 'Utilidad',
+        'nav.join': 'Participar',
+        'nav.cta': 'Adquirir B.D.C.',
+        'hero.eyebrow': 'Blockchain · Solana · B.D.C.',
+        'hero.subtitle': 'El Activo Digital de la Hermandad Moderna',
+        'hero.lead': 'Opera en Verum Wallet — cultura, identidad y tecnología en un ecosistema que llegó para quedarse.',
+        'hero.ctaPrimary': 'Sé Parte del Legado',
+        'hero.ctaSecondary': 'Saber Más',
+        'hero.scroll': 'Explora',
+        'opp.label': 'La Nueva Frontera',
+        'opp.title': 'Tokenización de<br><span class="gold-text">Comunidades Serias</span>',
+        'opp.quote': '"Los proyectos con base sólida y utilidad real consolidan relevancia durante décadas."',
+        'opp.body': 'La tokenización de comunidades auténticas es la nueva frontera de lo digital. Cuando tradición, honestidad y tecnología se encuentran, nace algo que va más allá de un activo — nace un legado. Bode Coin no es especulación. Es pertenencia con utilidad real.',
+        'opp.badge1': 'Más de 2000 Años de Filosofía',
+        'opp.badge2': 'Hermandad Real',
+        'opp.badge3': 'Exclusividad',
+        'about.label': 'Sobre el Proyecto',
+        'about.title': '<span class="gold-text">De la Cultura</span> al Ecosistema Digital',
+        'about.intro': 'Un flujo continuo que transforma identidad en activos, comunidad en poder económico y tradición en tecnología de punta.',
+        'flow1.title': 'Cultura',
+        'flow1.desc': 'Tradición, honestidad y valores que construyen civilizaciones',
+        'flow2.title': 'Comunidad',
+        'flow2.desc': 'Red de socios confiables conectados por una identidad común',
+        'flow3.title': 'Ecosistema',
+        'flow3.desc': 'Infraestructura blockchain con utilidad práctica y tangible',
+        'flow4.title': 'Activo Digital',
+        'flow4.desc': 'Bode Coin — identidad, acceso y poder económico unificados',
+        'token.label': 'Especificaciones Técnicas',
+        'token.title': 'Información del <span class="gold-text">Token B.D.C.</span>',
+        'token.intro': 'Emitido en la blockchain más rápida del mundo, opera en Verum Wallet para acceso inmediato al ecosistema.',
+        'token.c1label': 'Blockchain',
+        'token.c1sub': '65.000 TPS · Comisiones mínimas',
+        'token.c2label': 'Opera en la Cartera',
+        'token.c2sub': 'Self-custody · Autocustodia total',
+        'token.c3label': 'Estándar',
+        'token.c3sub': 'Solana Program Library · Auditable',
+        'util.label': 'Utilidad Real',
+        'util.title': 'Aplicable y <span class="gold-text">Concreto</span>',
+        'util.intro': 'No es teoría. Cada función de Bode Coin existe para usarse en el mundo real, con beneficios tangibles para los miembros de la hermandad.',
+        'util1.title': 'Beneficios',
+        'util1.desc': 'Los socios ofrecen descuentos exclusivos por el pago en activos de la comunidad BodeCoin en productos o servicios.',
+        'util2.title': 'Red Global',
+        'util2.desc': 'Conectando inversores de diversos capítulos por todo el mundo.',
+        'util3.title': 'Inversión y Valor',
+        'util3.desc': 'Un activo digital que crece junto con la fuerza de nuestra comunidad y la expansión de la marca.',
+        'util4.title': 'Productos Exclusivos',
+        'util4.desc': 'Merchandising, equipos y experiencias disponibles solo vía Bode Coin — artículos que no tienen precio en fiat.',
+        'util5.title': 'Transferencias P2P',
+        'util5.desc': 'Transfiere activos directamente a otros miembros on-chain usando infraestructura de software no custodial.',
+        'util6.title': 'Acceso Web3',
+        'util6.desc': 'Interactúa directamente con protocolos descentralizados en la red Solana de forma autónoma y no custodial.',
+        'join.label': 'Cómo Participar',
+        'join.title': '5 Pasos hacia el <span class="gold-text">Legado</span>',
+        'step1.title': 'Descargar Verum Wallet',
+        'step1.desc': 'Instala la cartera de autocustodia del ecosistema Verum Crypto',
+        'step2.title': 'Crear tu Cartera',
+        'step2.desc': 'Configura tu identidad digital en la blockchain Solana con seguridad total',
+        'step3.title': 'Acceder a B.D.C.',
+        'step3.desc': 'Accede a B.D.C. interactuando con protocolos de intercambio descentralizados (DEX) desde el navegador de dApps',
+        'step4.title': 'Acceder a Beneficios',
+        'step4.desc': 'Usa tus tokens para descuentos, eventos y productos exclusivos',
+        'step5.title': 'Integrarte a la Comunidad',
+        'step5.desc': 'Conviértete en parte de la hermandad moderna — el legado comienza aquí',
+        'diff.label': 'Diferenciales Estratégicos',
+        'diff.title': 'Por Qué <span class="gold-text">Bode Coin</span>',
+        'diff1.title': 'Base Cultural Auténtica',
+        'diff1.desc': 'Filosofía y valores con más de 2000 años de historia — no es hype, es una base sólida que atraviesa generaciones.',
+        'diff2.title': 'Comunidad Fuerte y Verificada',
+        'diff2.desc': 'Red real de miembros, hermandad y profesionales que aportan liquidez social y económica al token.',
+        'diff3.title': 'Utilidad Práctica y Tangible',
+        'diff3.desc': 'Cada token tiene un caso de uso real — descuentos, acceso, identidad. Sin promesas vacías.',
+        'diff4.title': 'Crecimiento Transparente',
+        'diff4.desc': 'Tokenomics transparente, vesting claro y roadmap auditable on-chain. Todo visible para todos.',
+        'diff5.title': 'Ecosistema de Confianza',
+        'diff5.desc': 'Más que una moneda, un símbolo de nuestra unión. Creamos un sistema de utilidad práctica que facilita las interacciones y el apoyo entre los miembros, siempre guiado por la credibilidad y la fuerza que solo una verdadera hermandad posee.',
+        'diff6.title': 'Valor Centrado en la Pertenencia',
+        'diff6.desc': 'Nuestro verdadero valor está en la seguridad de estar entre hermanos, usando la moneda como herramienta de acceso y utilidad en el día a día de la comunidad. Aprende, Invierte y Crece.',
+        'vision.label': 'Nuestra Visión',
+        'vision.quote': '"Construyendo un ecosistema <span class="gold-text">seguro, duradero</span> y respetado — conectando <span class="gold-text">cultura, tecnología</span> y pertenencia para las próximas generaciones."',
+        'vision.footer': 'Bode Coin · Solana Blockchain',
+        'cta.label': 'Acceso Anticipado',
+        'cta.title': 'Únete Ahora y<br><span class="gold-text">Sé Parte<br>del Legado</span>',
+        'cta.sub': 'Acceso anticipado a un ecosistema confiable y en expansión',
+        'cta.btn': 'Adquirir Bode Coin',
+        'cta.micro': 'Blockchain · Solana · B.D.C.',
+        'footer.disclaimer': 'Este contenido es informativo y educativo. No constituye recomendación financiera. Los activos digitales implican riesgos. Bode Coin © 2026.',
+        'footer.community': 'Comunidad',
+        'footer.terms': 'Términos de Uso y Privacidad',
+        'modal.close': 'CERRAR'
+      }
+    };
+
+    const LANG_HTML = { pt: 'pt-BR', en: 'en', es: 'es' };
+
+    function applyLang(lang) {
+      const dict = I18N[lang] || I18N.pt;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      if (dict['meta.title']) document.title = dict['meta.title'];
+      document.documentElement.setAttribute('lang', LANG_HTML[lang] || 'pt-BR');
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+      try { localStorage.setItem('bdc_lang', lang); } catch (e) {}
+    }
+
+    (function initLang() {
+      let saved = null;
+      try { saved = localStorage.getItem('bdc_lang'); } catch (e) {}
+      const browser = (navigator.language || 'pt').slice(0, 2).toLowerCase();
+      const lang = saved || (I18N[browser] ? browser : 'pt');
+      applyLang(lang);
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+      });
+    })();
+
     // ── SCROLL REVEAL ──
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
