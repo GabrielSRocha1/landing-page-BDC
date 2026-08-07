@@ -6,7 +6,7 @@
    Ao publicar uma nova versão, altere VERSION para invalidar os caches antigos.
 */
 
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.1.0';
 const CORE_CACHE = 'bdc-core-' + VERSION;
 const RUNTIME_CACHE = 'bdc-runtime-' + VERSION;
 
@@ -15,7 +15,6 @@ const CORE_ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './bdc-favicon-lp.png',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-maskable-192.png',
