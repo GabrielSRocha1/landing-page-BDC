@@ -1,0 +1,66 @@
+{
+  "id": "./",
+  "name": "Bode Coin — O Ativo Digital da Irmandade Moderna",
+  "short_name": "Bode Coin",
+  "description": "Bode Coin (B.D.C.) — cultura, identidade e tecnologia em um ecossistema na blockchain Solana. Negocie na Verum Wallet.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#060608",
+  "theme_color": "#060608",
+  "categories": ["finance", "business", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Utilidade do Token",
+      "short_name": "Utilidade",
+      "url": "./#utility",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Participar da Irmandade",
+      "short_name": "Participar",
+      "url": "./#join",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

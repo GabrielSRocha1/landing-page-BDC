@@ -5,10 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bode Coin — O Ativo Digital da Irmandade Moderna</title>
-  <link rel="icon" type="image/png" href="bdc-favicon-lp.png?v=2">
-  <link rel="shortcut icon" type="image/png" href="bdc-favicon-lp.png?v=2">
-  <link rel="apple-touch-icon" href="bdc-favicon-lp.png?v=2">
-  <link rel="icon" href="bdc-favicon-lp.png?v=2" type="image/x-icon">
+  <meta name="description"
+    content="Bode Coin (B.D.C.) — cultura, identidade e tecnologia em um ecossistema na blockchain Solana. Negocie na Verum Wallet.">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+  <link rel="shortcut icon" type="image/png" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+
+  <!-- ── PWA ── -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#060608">
+  <meta name="color-scheme" content="dark">
+  <meta name="application-name" content="Bode Coin">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Bode Coin">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="msapplication-TileColor" content="#060608">
+  <meta name="msapplication-TileImage" content="icons/icon-192.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -38,6 +53,10 @@
 
     html {
       scroll-behavior: smooth;
+    }
+
+    [hidden] {
+      display: none !important;
     }
 
     body {
@@ -161,6 +180,7 @@
       padding: 0.5rem 1.4rem;
       cursor: pointer;
       text-decoration: none;
+      white-space: nowrap;
       transition: background 0.3s, color 0.3s;
     }
 
@@ -176,10 +196,64 @@
       gap: 1.2rem;
     }
 
+    .lang-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
     .lang-switch {
       display: flex;
       align-items: center;
       gap: 0.4rem;
+    }
+
+    /* Gatilho do dropdown — só aparece no mobile */
+    .lang-toggle {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      color: var(--text-muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.5rem;
+      border-radius: 3px;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .lang-toggle svg {
+      width: 18px;
+      height: 12px;
+      display: block;
+      border-radius: 1px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .lang-toggle-flag {
+      display: inline-flex;
+    }
+
+    .lang-toggle .lang-caret {
+      width: 9px;
+      height: 9px;
+      box-shadow: none;
+      opacity: 0.7;
+      transition: transform 0.25s;
+    }
+
+    .lang-toggle[aria-expanded="true"] {
+      color: var(--gold);
+      border-color: rgba(201, 168, 76, 0.6);
+    }
+
+    .lang-toggle[aria-expanded="true"] .lang-caret {
+      transform: rotate(180deg);
     }
 
     .lang-btn {
@@ -217,6 +291,135 @@
       color: var(--black);
       background: var(--gold);
       border-color: var(--gold);
+    }
+
+    /* ── SHARE ── */
+    .nav-share {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .share-btn svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .share-btn:hover,
+    .share-btn[aria-expanded="true"] {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .share-menu {
+      position: absolute;
+      top: calc(100% + 0.7rem);
+      right: 0;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      padding: 0.4rem;
+      background: #0C0C12;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 4px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+      z-index: 120;
+    }
+
+    .share-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .share-menu a,
+    .share-menu button {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      background: transparent;
+      border: 0;
+      padding: 0.55rem 0.7rem;
+      border-radius: 3px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: left;
+      color: var(--text-muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.25s, background 0.25s;
+    }
+
+    .share-menu a:hover,
+    .share-menu button:hover {
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.09);
+    }
+
+    .share-menu svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+    }
+
+    .share-divider {
+      height: 1px;
+      margin: 0.25rem 0.4rem;
+      background: rgba(201, 168, 76, 0.18);
+    }
+
+    .share-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 2rem;
+      transform: translateX(-50%) translateY(12px);
+      padding: 0.7rem 1.5rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+      z-index: 2000;
+    }
+
+    .share-toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .share-toast.clickable {
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
     }
 
     /* ── HERO ── */
@@ -1057,8 +1260,68 @@
       color: var(--white);
       line-height: 1.7;
       font-weight: 300;
-      white-space: pre-wrap;
       margin-bottom: 2.5rem;
+    }
+
+    .modal-intro {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .modal-updated {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-bottom: 1.3rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+    }
+
+    .modal-text h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 2.2rem 0 1rem;
+    }
+
+    .modal-text h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin: 1.4rem 0 0.4rem;
+    }
+
+    .modal-text p {
+      margin-bottom: 0.9rem;
+    }
+
+    .modal-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-text strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .modal-note {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .modal-final-notice {
+      margin-top: 2.2rem;
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(201, 168, 76, 0.06);
+      color: var(--text-muted);
+      font-size: 0.88rem;
     }
 
     .modal-close-btn {
@@ -1106,18 +1369,113 @@
       }
     }
 
-    @media(max-width: 480px) {
+    /* ── MOBILE: idioma vira dropdown ── */
+    @media(max-width: 600px) {
       .nav-cta {
-        padding: 0.45rem 0.9rem;
-        font-size: 0.72rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
       }
 
-      .lang-btn .lang-label {
+      .lang-toggle {
+        display: inline-flex;
+      }
+
+      .lang-switch {
+        position: absolute;
+        top: calc(100% + 0.6rem);
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.1rem;
+        min-width: 140px;
+        padding: 0.4rem;
+        background: #0C0C12;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        border-radius: 4px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+        z-index: 120;
+      }
+
+      .lang-switch.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .lang-switch .lang-btn {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 0.6rem;
+        border-color: transparent;
+        padding: 0.5rem 0.6rem;
+        font-size: 0.78rem;
+      }
+
+      .lang-switch .lang-btn .lang-label {
+        display: inline;
+      }
+
+      .lang-switch .lang-btn.active {
+        background: rgba(201, 168, 76, 0.12);
+        color: var(--gold);
+        border-color: transparent;
+      }
+
+      .modal-content {
+        padding: 2rem 1.4rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    @media(max-width: 480px) {
+      nav {
+        padding: 1rem 1.1rem;
+      }
+
+      .nav-logo {
+        font-size: 1.35rem;
+      }
+
+      .nav-right {
+        gap: 0.5rem;
+      }
+
+      .nav-cta {
+        padding: 0.36rem 0.55rem;
+        font-size: 0.66rem;
+        letter-spacing: 0.08em;
+      }
+
+      /* Só a bandeira no gatilho — o código do idioma aparece no menu aberto */
+      .lang-toggle {
+        padding: 0.3rem 0.4rem;
+      }
+
+      .lang-toggle-label {
         display: none;
       }
 
-      .lang-btn {
-        padding: 0.3rem 0.4rem;
+      .share-btn {
+        width: 30px;
+        height: 30px;
+      }
+
+      .share-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .share-menu {
+        min-width: 180px;
       }
 
       .opp-grid {
@@ -1184,21 +1542,89 @@
       <li><a href="#join" data-i18n="nav.join">Participar</a></li>
     </ul>
     <div class="nav-right">
-      <div class="lang-switch" role="group" aria-label="Select language">
-        <button type="button" class="lang-btn" data-lang="en" aria-label="English">
-          <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><g fill="#fff"><rect y="1.5" width="30" height="1.6"/><rect y="4.6" width="30" height="1.6"/><rect y="7.7" width="30" height="1.6"/><rect y="10.8" width="30" height="1.6"/><rect y="13.9" width="30" height="1.6"/><rect y="17" width="30" height="1.6"/></g><rect width="13" height="11" fill="#3c3b6e"/></svg>
-          <span class="lang-label">EN</span>
+      <div class="lang-wrap" id="langWrap">
+        <button type="button" class="lang-toggle" id="langToggle" aria-haspopup="true" aria-expanded="false"
+          aria-controls="langSwitch" aria-label="Idioma" title="Idioma" data-i18n-label="nav.lang">
+          <span class="lang-toggle-flag" id="langToggleFlag"></span>
+          <span class="lang-toggle-label" id="langToggleLabel">PT</span>
+          <svg class="lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
         </button>
-        <button type="button" class="lang-btn" data-lang="es" aria-label="Español">
-          <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#c60b1e"/><rect y="5" width="30" height="10" fill="#ffc400"/></svg>
-          <span class="lang-label">ES</span>
-        </button>
-        <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">
-          <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009b3a"/><polygon points="15,2 28,10 15,18 2,10" fill="#fedf00"/><circle cx="15" cy="10" r="4.1" fill="#002776"/></svg>
-          <span class="lang-label">PT</span>
-        </button>
+        <div class="lang-switch" id="langSwitch" role="group" aria-label="Select language">
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">
+            <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><g fill="#fff"><rect y="1.5" width="30" height="1.6"/><rect y="4.6" width="30" height="1.6"/><rect y="7.7" width="30" height="1.6"/><rect y="10.8" width="30" height="1.6"/><rect y="13.9" width="30" height="1.6"/><rect y="17" width="30" height="1.6"/></g><rect width="13" height="11" fill="#3c3b6e"/></svg>
+            <span class="lang-label">EN</span>
+          </button>
+          <button type="button" class="lang-btn" data-lang="es" aria-label="Español">
+            <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#c60b1e"/><rect y="5" width="30" height="10" fill="#ffc400"/></svg>
+            <span class="lang-label">ES</span>
+          </button>
+          <button type="button" class="lang-btn active" data-lang="pt" aria-label="Português">
+            <svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009b3a"/><polygon points="15,2 28,10 15,18 2,10" fill="#fedf00"/><circle cx="15" cy="10" r="4.1" fill="#002776"/></svg>
+            <span class="lang-label">PT</span>
+          </button>
+        </div>
       </div>
       <a href="https://verumcrypto.com" target="_blank" rel="noopener noreferrer" class="nav-cta" data-i18n="nav.cta">Adquirir B.D.C.</a>
+      <div class="nav-share" id="shareWrap">
+        <button type="button" class="share-btn" id="shareBtn" aria-haspopup="true" aria-expanded="false"
+          aria-controls="shareMenu" aria-label="Compartilhar" title="Compartilhar" data-i18n-label="nav.share">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.6" y1="10.5" x2="15.4" y2="6.6" />
+            <line x1="8.6" y1="13.5" x2="15.4" y2="17.4" />
+          </svg>
+        </button>
+        <div class="share-menu" id="shareMenu" role="menu" aria-labelledby="shareBtn">
+          <button type="button" id="shareNative" role="menuitem" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12" />
+              <path d="M8 7l4-4 4 4" />
+              <path d="M5 13v6h14v-6" />
+            </svg>
+            <span data-i18n="share.native">Compartilhar…</span>
+          </button>
+          <a href="#" data-share="whatsapp" target="_blank" rel="noopener noreferrer" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23z" />
+              <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.15-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.29-.02-.45.13-.6.13-.13.3-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" />
+            </svg>
+            <span>WhatsApp</span>
+          </a>
+          <a href="#" data-share="x" target="_blank" rel="noopener noreferrer" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.9 2H22l-7.1 8.1L23.2 22h-6.6l-5.2-6.8L5.5 22H2.4l7.6-8.7L1.8 2h6.7l4.7 6.2L18.9 2zm-1.1 18h1.7L7.3 3.7H5.5L17.8 20z" />
+            </svg>
+            <span>X / Twitter</span>
+          </a>
+          <a href="#" data-share="telegram" target="_blank" rel="noopener noreferrer" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21.9 4.3 18.8 19c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.8 13.2l-4.6-1.4c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.6.2 1.5 1z" />
+            </svg>
+            <span>Telegram</span>
+          </a>
+          <a href="#" data-share="facebook" target="_blank" rel="noopener noreferrer" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.9h-2.33V22c4.78-.79 8.44-4.94 8.44-9.94z" />
+            </svg>
+            <span>Facebook</span>
+          </a>
+          <div class="share-divider"></div>
+          <button type="button" id="shareCopy" role="menuitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M9.9 14.1a3.5 3.5 0 0 1 0-4.95l2.83-2.83a3.5 3.5 0 0 1 4.95 4.95l-1.2 1.2a1 1 0 1 1-1.41-1.42l1.2-1.2a1.5 1.5 0 1 0-2.12-2.12L11.3 10.6a1.5 1.5 0 0 0 0 2.12 1 1 0 1 1-1.41 1.41z" />
+              <path d="M14.1 9.9a3.5 3.5 0 0 1 0 4.95l-2.83 2.83a3.5 3.5 0 1 1-4.95-4.95l1.2-1.2a1 1 0 1 1 1.41 1.42l-1.2 1.2a1.5 1.5 0 1 0 2.12 2.12l2.83-2.83a1.5 1.5 0 0 0 0-2.12 1 1 0 1 1 1.42-1.42z" />
+            </svg>
+            <span data-i18n="share.copy">Copiar link</span>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -1499,7 +1925,7 @@
       Bode Coin © 2026.
     </p>
     <ul class="footer-links">
-      <li><a href="#" data-i18n="footer.community">Comunidade</a></li>
+      <li><a href="#opportunity" data-i18n="footer.community">Comunidade</a></li>
       <li><a href="#" id="openTermsLink" data-i18n="footer.terms">Terms of Use and Privacy</a></li>
     </ul>
   </footer>
@@ -1507,51 +1933,67 @@
   <!-- ══════════ MODAL TERMOS ══════════ -->
   <div class="modal-overlay" id="termsModal">
     <div class="modal-content">
-      <div class="modal-title">LEGAL NOTICE, GOVERNANCE, AND PRIVACY – BODE COIN (BDC)</div>
-      <div class="modal-text">1. SOFTWARE PROVIDER AND JURISDICTION
+      <div class="modal-title">AVISO LEGAL, PRIVACIDADE E CÓDIGO DE CONDUTA – BODE COIN (BDC)</div>
+      <div class="modal-text">
+        <p class="modal-intro">Este documento contém as diretrizes atualizadas para o ecossistema Bode Coin (BDC),
+          adaptadas às leis de proteção de dados da América Latina e focadas na transparência da comunidade.</p>
+        <p class="modal-updated">Última Atualização: Agosto de 2026</p>
 
-        Bode Coin (BDC) is an independent digital asset. Verum Wallet is purely non-custodial software acting as a
-        technical interface. Verum Wallet Freeport, the company that develops this software, is incorporated and
-        governed under the laws of the Republic of Panama. Any legal dispute will be settled exclusively in the courts
-        of Panama City.
+        <h3>1. Aviso Legal e Isenção de Responsabilidade (Disclaimer)</h3>
 
-        2. ASSET NATURE AND RISK DISCLAIMER
+        <h4>1.1. Natureza do Ativo BDC</h4>
+        <p>A Bode Coin (BDC) é um ativo digital independente operando na rede blockchain Solana. O BDC é um Token de
+          Utilidade, destinado a fomentar a integração da comunidade e o engajamento no ecossistema. Não constitui, em
+          nenhuma circunstância ou jurisdição, um valor mobiliário, contrato de investimento, ativo financeiro regulado
+          ou promessa de lucros.</p>
 
-        Utility Token: BDC is a utility token intended to foster community, engagement, and governance. It does not
-        constitute, in any jurisdiction, a security, investment contract, or promise of profits.
+        <h4>1.2. Alerta de Risco e Volatilidade</h4>
+        <p>O usuário declara estar ciente de que os ativos digitais possuem alta volatilidade. A equipe do projeto e a
+          infraestrutura técnica não oferecem garantias de valorização, preço mínimo, liquidez ou recompra obrigatória.
+          O valor do ativo é determinado exclusivamente pelo mercado.</p>
 
-        Volatility: The user declares awareness that digital assets have high volatility. Verum Wallet Freeport provides
-        the software technology only and does not provide liquidity, guarantee appreciation, a minimum price, or
-        mandatory buyback.
+        <h4>1.3. Software e Custódia (Verum Wallet)</h4>
+        <p>Para a gestão de ativos BDC, recomenda-se o uso da Verum Wallet.</p>
+        <p><strong>Nota de Segurança:</strong> A Verum Wallet é um software puramente não custodial que atua como uma
+          interface técnica. O usuário é o único responsável pela guarda de suas chaves privadas (seeds). Não nos
+          responsabilizamos por ativos enviados para endereços incorretos, perda de acesso ou falhas em carteiras de
+          terceiros.</p>
 
-        3. TRANSPARENCY AND IMMUTABILITY (BLOCKCHAIN)
+        <h3>2. Política de Privacidade e Cookies</h3>
+        <p class="modal-note">Documento elaborado em conformidade com os princípios da LGPD e legislações de proteção de
+          dados da América Latina.</p>
 
-        Public Data: By using the Blockchain network to transact BDC, the user acknowledges that their wallet address
-        (Public Key) and transaction history are public, permanent, and immutable.
+        <h4>2.1. Transparência e Imutabilidade (Blockchain)</h4>
+        <p>Ao realizar transações com BDC, o usuário reconhece que seu endereço de carteira (Chave Pública) e o
+          histórico de transações são dados públicos, permanentes e imutáveis na blockchain Solana. Estes dados são
+          inerentes à tecnologia e não podem ser alterados ou excluídos.</p>
 
-        Right to be Forgotten: Due to the technical nature of the Blockchain, the "Right to be Forgotten" provided for
-        in Law 81/2019 (Panama) and GDPR applies only to the centralized databases of Verum Wallet Freeport (such as
-        marketing emails), as it is not technically possible to delete records on the decentralized network.
+        <h4>2.2. Processamento de Dados Pessoais</h4>
+        <p>Coletamos dados pessoais (como nome ou e-mail) estritamente para fins de suporte ao usuário e comunicações
+          essenciais do ecossistema.</p>
+        <p><strong>Base Legal:</strong> O processamento é realizado com base no consentimento explícito do usuário e no
+          legítimo interesse em manter a integridade da rede.</p>
+        <p><strong>Segurança:</strong> Implementamos medidas técnicas para proteger dados coletados fora da rede
+          blockchain contra acessos não autorizados.</p>
 
-        4. DATA PROCESSING (LAW 81/2019 - PANAMA)
+        <h4>2.3. Cookies e Direitos</h4>
+        <p>Utilizamos cookies apenas para garantir o funcionamento técnico do site e melhorar a experiência de
+          navegação. O usuário possui o direito de solicitar o acesso, correção ou exclusão de seus dados pessoais
+          armazenados em nossos sistemas centralizados.</p>
 
-        Limited Collection: We collect personal data (such as email and name) strictly for governance purposes,
-        ecosystem updates, and user support.
+        <h3>3. Código de Conduta</h3>
+        <p>A comunidade BDC é mundial e real. Espera-se que todos os membros mantenham um ambiente de respeito,
+          colaboração e integridade, visando o crescimento sustentável do ecossistema do ativo BDC.</p>
 
-        Security: We implement technical protection measures to prevent unauthorized access to data collected outside
-        the blockchain network.
-
-        Legal Basis: Data processing is carried out based on the user's explicit consent upon joining the community and
-        the legitimate interest in maintaining the network.
-
-        5. CUSTODY AND SECURITY
-
-        Verum Wallet Freeport recommends using Verum Wallet for managing BDC assets. The company is not responsible for
-        assets sent to incorrect addresses, loss of private keys (seeds), or hacks in third-party wallets (Hot Wallets).
+        <p class="modal-final-notice"><strong>Aviso:</strong> Este documento é uma prévia para fins informativos e pode
+          ser atualizado sem aviso prévio e conforme o crescimento do projeto e mudanças nas regulamentações locais.</p>
       </div>
       <button class="modal-close-btn" id="closeTermsBtn" data-i18n="modal.close">CLOSE</button>
     </div>
   </div>
+
+  <!-- TOAST (compartilhamento / PWA) -->
+  <div class="share-toast" id="shareToast" role="status" aria-live="polite"></div>
 
   <script>
     // ══════════ I18N / LANGUAGE SWITCHER ══════════
@@ -1563,6 +2005,13 @@
         'nav.utility': 'Utilidade',
         'nav.join': 'Participar',
         'nav.cta': 'Adquirir B.D.C.',
+        'nav.share': 'Compartilhar',
+        'nav.lang': 'Idioma',
+        'pwa.update': 'Nova versão disponível — toque para atualizar',
+        'share.native': 'Compartilhar…',
+        'share.copy': 'Copiar link',
+        'share.copied': 'Link copiado!',
+        'share.message': 'Bode Coin — O Ativo Digital da Irmandade Moderna',
         'hero.eyebrow': 'Blockchain · Solana · B.D.C.',
         'hero.subtitle': 'O Ativo Digital da Irmandade Moderna',
         'hero.lead': 'Negocie na Verum Wallet — cultura, identidade e tecnologia em um ecossistema que veio para ficar.',
@@ -1657,6 +2106,13 @@
         'nav.utility': 'Utility',
         'nav.join': 'Join',
         'nav.cta': 'Get B.D.C.',
+        'nav.share': 'Share',
+        'nav.lang': 'Language',
+        'pwa.update': 'New version available — tap to update',
+        'share.native': 'Share…',
+        'share.copy': 'Copy link',
+        'share.copied': 'Link copied!',
+        'share.message': 'Bode Coin — The Digital Asset of the Modern Brotherhood',
         'hero.eyebrow': 'Blockchain · Solana · B.D.C.',
         'hero.subtitle': 'The Digital Asset of the Modern Brotherhood',
         'hero.lead': 'Trade on Verum Wallet — culture, identity and technology in an ecosystem built to last.',
@@ -1751,6 +2207,13 @@
         'nav.utility': 'Utilidad',
         'nav.join': 'Participar',
         'nav.cta': 'Adquirir B.D.C.',
+        'nav.share': 'Compartir',
+        'nav.lang': 'Idioma',
+        'pwa.update': 'Nueva versión disponible — toca para actualizar',
+        'share.native': 'Compartir…',
+        'share.copy': 'Copiar enlace',
+        'share.copied': '¡Enlace copiado!',
+        'share.message': 'Bode Coin — El Activo Digital de la Hermandad Moderna',
         'hero.eyebrow': 'Blockchain · Solana · B.D.C.',
         'hero.subtitle': 'El Activo Digital de la Hermandad Moderna',
         'hero.lead': 'Opera en Verum Wallet — cultura, identidad y tecnología en un ecosistema que llegó para quedarse.',
@@ -1842,18 +2305,40 @@
 
     const LANG_HTML = { pt: 'pt-BR', en: 'en', es: 'es' };
 
+    let currentLang = 'pt';
+
     function applyLang(lang) {
       const dict = I18N[lang] || I18N.pt;
+      currentLang = I18N[lang] ? lang : 'pt';
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-label');
+        if (dict[key] !== undefined) {
+          el.setAttribute('aria-label', dict[key]);
+          el.setAttribute('title', dict[key]);
+        }
       });
       if (dict['meta.title']) document.title = dict['meta.title'];
       document.documentElement.setAttribute('lang', LANG_HTML[lang] || 'pt-BR');
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
       });
+      syncLangToggle(currentLang);
       try { localStorage.setItem('bdc_lang', lang); } catch (e) {}
+    }
+
+    // Espelha o idioma ativo no gatilho do dropdown (mobile)
+    function syncLangToggle(lang) {
+      const flag = document.getElementById('langToggleFlag');
+      const label = document.getElementById('langToggleLabel');
+      const active = document.querySelector('.lang-btn[data-lang="' + lang + '"]');
+      if (!active) return;
+      const svg = active.querySelector('svg');
+      if (flag && svg) flag.innerHTML = svg.outerHTML;
+      if (label) label.textContent = lang.toUpperCase();
     }
 
     (function initLang() {
@@ -1862,8 +2347,206 @@
       const browser = (navigator.language || 'pt').slice(0, 2).toLowerCase();
       const lang = saved || (I18N[browser] ? browser : 'pt');
       applyLang(lang);
+
+      const wrap = document.getElementById('langWrap');
+      const toggle = document.getElementById('langToggle');
+      const menu = document.getElementById('langSwitch');
+
+      function closeLangMenu() {
+        if (!menu || !toggle) return;
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+        btn.addEventListener('click', () => {
+          applyLang(btn.getAttribute('data-lang'));
+          closeLangMenu();
+        });
+      });
+
+      // Dropdown (só visível no mobile)
+      if (wrap && toggle && menu) {
+        toggle.addEventListener('click', () => {
+          const open = menu.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!wrap.contains(e.target)) closeLangMenu();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeLangMenu();
+        });
+      }
+    })();
+
+    // ── TOAST (compartilhado entre share e PWA) ──
+    const t = (key) => (I18N[currentLang] || I18N.pt)[key] || '';
+    const toastEl = document.getElementById('shareToast');
+    let toastTimer = null;
+    let toastAction = null;
+
+    function hideToast() {
+      if (!toastEl) return;
+      toastEl.classList.remove('show', 'clickable');
+      toastAction = null;
+    }
+
+    function showToast(message, opts) {
+      if (!toastEl || !message) return;
+      opts = opts || {};
+      toastEl.textContent = message;
+      toastAction = opts.action || null;
+      toastEl.classList.toggle('clickable', !!toastAction);
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      const duration = opts.duration === undefined ? 2600 : opts.duration;
+      if (duration > 0) toastTimer = setTimeout(hideToast, duration);
+    }
+
+    if (toastEl) {
+      toastEl.addEventListener('click', () => {
+        const action = toastAction;
+        hideToast();
+        if (action) action();
+      });
+    }
+
+    // ── COMPARTILHAR ──
+    (function initShare() {
+      const wrap = document.getElementById('shareWrap');
+      const btn = document.getElementById('shareBtn');
+      const menu = document.getElementById('shareMenu');
+      const nativeBtn = document.getElementById('shareNative');
+      const copyBtn = document.getElementById('shareCopy');
+      if (!wrap || !btn || !menu) return;
+
+      const shareUrl = () => window.location.href.split('#')[0];
+      const shareText = () => (I18N[currentLang] || I18N.pt)['share.message'] || document.title;
+
+      function buildLinks() {
+        const u = encodeURIComponent(shareUrl());
+        const t = encodeURIComponent(shareText());
+        menu.querySelectorAll('[data-share]').forEach(a => {
+          switch (a.getAttribute('data-share')) {
+            case 'whatsapp': a.href = 'https://api.whatsapp.com/send?text=' + t + '%20' + u; break;
+            case 'x': a.href = 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u; break;
+            case 'telegram': a.href = 'https://t.me/share/url?url=' + u + '&text=' + t; break;
+            case 'facebook': a.href = 'https://www.facebook.com/sharer/sharer.php?u=' + u; break;
+          }
+        });
+      }
+
+      function openMenu() {
+        buildLinks();
+        menu.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeMenu() {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      btn.addEventListener('click', () => {
+        menu.classList.contains('open') ? closeMenu() : openMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!wrap.contains(e.target)) closeMenu();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+      if (nativeBtn) {
+        if (navigator.share) {
+          nativeBtn.hidden = false;
+          nativeBtn.addEventListener('click', () => {
+            closeMenu();
+            navigator.share({
+              title: document.title,
+              text: shareText(),
+              url: shareUrl()
+            }).catch(() => {});
+          });
+        } else {
+          nativeBtn.remove();
+        }
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const url = shareUrl();
+          const done = () => { closeMenu(); showToast(t('share.copied')); };
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(url).then(done).catch(() => { fallbackCopy(url); done(); });
+          } else {
+            fallbackCopy(url);
+            done();
+          }
+        });
+      }
+
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    })();
+
+    // ══════════ PWA ══════════
+    // A instalação fica por conta do navegador (ícone na barra de endereço /
+    // banner nativo). Não interceptamos "beforeinstallprompt" de propósito:
+    // chamar preventDefault() nele suprimiria o convite padrão do navegador.
+    (function initPWA() {
+      if (!('serviceWorker' in navigator)) return;
+      if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
+
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          function promptUpdate(worker) {
+            showToast(t('pwa.update'), {
+              duration: 0,
+              action: () => worker.postMessage({ type: 'SKIP_WAITING' })
+            });
+          }
+
+          // Já existe uma versão nova aguardando (aba anterior deixou pendente)
+          if (reg.waiting && navigator.serviceWorker.controller) promptUpdate(reg.waiting);
+
+          reg.addEventListener('updatefound', () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener('statechange', () => {
+              // controller existente => é atualização, não a primeira instalação
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) promptUpdate(nw);
+            });
+          });
+
+          // Procura atualização ao voltar para a aba
+          document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') reg.update().catch(() => {});
+          });
+        }).catch(() => {});
+
+        let reloading = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (reloading) return;
+          reloading = true;
+          window.location.reload();
+        });
       });
     })();
 
