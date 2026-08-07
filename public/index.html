@@ -2765,6 +2765,12 @@
       if (mascot) mascot.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
     });
   </script>
+
+  <!-- ══════════ VERCEL WEB ANALYTICS ══════════
+       O script e servido pela propria Vercel quando o Web Analytics esta
+       ativado no painel do projeto. Em desenvolvimento local ele retorna
+       404, o que e esperado e nao quebra nada. -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 
 </html>

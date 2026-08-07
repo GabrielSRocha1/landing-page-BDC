@@ -6,7 +6,7 @@
    Ao publicar uma nova versão, altere VERSION para invalidar os caches antigos.
 */
 
-const VERSION = 'v1.1.0';
+const VERSION = 'v1.2.0';
 const CORE_CACHE = 'bdc-core-' + VERSION;
 const RUNTIME_CACHE = 'bdc-runtime-' + VERSION;
 
@@ -98,6 +98,11 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+
+  // Analytics da Vercel: nunca interceptar. O script deve vir sempre da rede
+  // (servir uma versão em cache quebraria a coleta) e os beacons precisam
+  // chegar ao servidor sem passar pelo cache.
+  if (url.pathname.startsWith('/_vercel/')) return;
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirstNavigation(event));
